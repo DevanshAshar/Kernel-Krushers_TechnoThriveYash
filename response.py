@@ -1,6 +1,10 @@
 import openai
 import json
 import random
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Load the intents from the JSON file
 def load_intents(file_path):
@@ -41,6 +45,5 @@ while True:
 
     response = get_response(user_input, intents)
     print("Chatbot:", response)    
-
 
 
