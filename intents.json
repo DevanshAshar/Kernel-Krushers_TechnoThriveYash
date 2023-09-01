@@ -1,0 +1,40 @@
+{
+    "intents": [
+      {
+        "tag": "greeting",
+        "patterns": ["Hello", "Hi", "Hey", "Greetings", "How are you?"],
+        "responses": ["Hello! How can I help you today?", "Hi there! How can I assist you?", "Hey! How can I support you?", "Greetings! How can I be of service?"]
+      },
+      {
+        "tag": "goodbye",
+        "patterns": ["Goodbye", "Bye", "See you later", "Take care"],
+        "responses": ["Goodbye! Take care.", "Farewell! If you ever need assistance, don't hesitate to return.", "See you later!"]
+      },
+      {
+        "tag": "thanks",
+        "patterns": ["Thank you", "Thanks", "Appreciate it", "Thanks a lot"],
+        "responses": ["You're welcome!", "You're welcome. If you have more questions, feel free to ask.", "No problem!"]
+      },
+      {
+        "tag": "help",
+        "patterns": ["Can you help me?", "I need assistance", "I'm feeling lost"],
+        "responses": ["Of course! I'm here to help. Please feel free to share what's on your mind.", "I'm here to assist you. What's troubling you?", "I'm here to provide support. Please tell me what's going on."]
+      },
+      {
+        "tag": "emotions",
+        "patterns": ["I'm feeling anxious", "I'm depressed", "I'm stressed out", "I'm feeling overwhelmed"],
+        "responses": ["I'm sorry to hear that you're feeling this way. It's important to talk about it. How can I assist you?", "I understand that you're going through a tough time. Please share more about your feelings so I can better help you.", "I'm here to listen. Please tell me more about what's bothering you."]
+      },
+      {
+        "tag": "resources",
+        "patterns": ["Can you recommend self-help resources?", "Where can I find support?", "Do you have any coping strategies?"],
+        "responses": ["Certainly! Here are some self-help resources that might be helpful: [Provide a list of relevant resources].", "You can find support from [mention local mental health organizations or hotlines]. Additionally, you might find these coping strategies useful: [list coping strategies]."]
+      },
+      {
+        "tag": "fallback",
+        "patterns": ["I don't understand", "Can you repeat that?", "Sorry, what?", "I'm confused"],
+        "responses": ["I apologize if my response was unclear. Can you please rephrase your question?", "I'm sorry if I didn't explain myself well. Can you ask your question differently?", "I'm here to help. Could you please provide more details or ask your question in a different way?"]
+      }
+    ]
+  }
+  
