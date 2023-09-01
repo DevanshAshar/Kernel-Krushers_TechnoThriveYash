@@ -11,8 +11,6 @@ def load_intents(file_path):
     with open(file_path, 'r') as file:
         return json.load(file)
 
-# OpenAI GPT-3 API key
-api_key = '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'  # Replace with your actual API key
 
 # Function to get a response based on the user's input
 def get_response(user_input, intents):
@@ -28,7 +26,7 @@ def get_response(user_input, intents):
         engine="text-davinci-002",
         prompt=prompt,
         max_tokens=50,  # Adjust the token limit as needed
-        api_key=api_key
+        api_key=os.environ.get('OPENAI_API_KEY')
     )
     return response.choices[0].text.strip()
 
