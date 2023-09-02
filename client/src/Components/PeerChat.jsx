@@ -31,12 +31,12 @@ const PeerChat = () => {
   }, [ws]);
 
   const handlesubmit = () => {
-    const backendurl = "ws://127.0.0.1:8000/";
+    const backendurl = "127.0.0.1:8000/";
     const pathname = "chat/";
     const loc = window.location;
     const wsStart = loc.protocol === "https:" ? "wss://" : "ws://";
     const lobby_name = generateUniqueCode();
-    const endpoint = `${backendurl}${lobby_name}/`;
+    const endpoint = `${wsStart}${backendurl}ws/message/${lobby_name}/`;
     console.log(endpoint);
     const webSocket = new WebSocket(endpoint);
     setWs(webSocket);
