@@ -9,10 +9,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         print("chat connect")
         self.lobby_code = self.scope["url_route"]["kwargs"]["lobby_code"]
-        self.username = self.scope["url_route"]["kwargs"]["username"]
+        print(self.lobby_code)
+        self.room_group_name = self.lobby_code
         
+        await self.accept()
         await self.channel_layer.group_add(
-            self.lobby_code,
+            self.room_group_name,
             self.channel_name
         )
     
@@ -20,7 +22,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         print(close_code)
         print('chat disconnect')
         await self.channel_layer.group_discard(
-            self.lobby_code,
+            self.room_group_name,
             self.channel_name
         )
         
