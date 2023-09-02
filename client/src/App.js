@@ -111,6 +111,7 @@ import { Route, Routes } from "react-router-dom";
 import ChatPg from "./Components/ChatPg";
 import BreathingCircle from "./breathing/BreathingCircle";
 import TestPg from "./Components/TestPg";
+import PeerChat from "./Components/PeerChat";
 
 function App() {
   return (
@@ -118,6 +119,7 @@ function App() {
       <Route path="/" element={<TestPg />} />
       <Route path="/chatPg" element={<ChatPg />} />
       <Route path="/breathingGame" element={<BreathingCircle />} />
+      <Route path='/peerchat' element={<PeerChat/>}/>
     </Routes>
   );
 }
