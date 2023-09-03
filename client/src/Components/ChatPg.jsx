@@ -8,7 +8,7 @@ const API_KEY = "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";
 
 const systemMessage = {
   "role": "system",
-  "content": "Explain things like you're a mental health support chatbot"
+  "content": "Explain things like you're a mental health professional."
 };
 
 const ChatPg = () => {
