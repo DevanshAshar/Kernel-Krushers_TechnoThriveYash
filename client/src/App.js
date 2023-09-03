@@ -113,11 +113,12 @@ import BreathingCircle from "./breathing/BreathingCircle";
 import TestPg from "./Components/TestPg";
 import PeerChat from "./Components/PeerChat";
 import SpeechToText from "./Components/SpeechToText";
+import Landing from "./Layout/Landing";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<TestPg />} />
+      <Route path="/" element={<Landing />} />
       <Route path="/chatPg" element={<ChatPg />} />
       <Route path="/breathingGame" element={<BreathingCircle />} />
       <Route path='/peerchat' element={<PeerChat/>}/>
