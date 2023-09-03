@@ -1,10 +1,29 @@
 import React, { useEffect, useState } from "react";
 import generateUniqueCode from "../utils/GenerateUniqueCode";
+import axios from "axios";
 
 const PeerChat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [ws, setWs] = useState(null);
+  const [roomList, SetRoomList] = useState([]);
+  const [roomId, setRoomId] = useState("");
+  const [username, setUsername] = useState('');
+
+  const getRoomList = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}/room/roomlist/`
+      );
+      SetRoomList(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getRoomList();
+  }, []);
 
   useEffect(() => {
     if (ws) {
@@ -15,6 +34,7 @@ const PeerChat = () => {
       ws.addEventListener("message", (event) => {
         console.log("message");
         const message = JSON.parse(event.data);
+        console.log(message)
         setMessages((prevMessages) => [...prevMessages, message.message]);
       });
 
@@ -29,13 +49,13 @@ const PeerChat = () => {
     }
   }, [ws]);
 
-  const handlesubmit = () => {
+  const handlesubmit = (room_id) => {
     const backendurl = "127.0.0.1:8000/";
     const pathname = "chat/";
     const loc = window.location;
     const wsStart = loc.protocol === "https:" ? "wss://" : "ws://";
     const lobby_name = generateUniqueCode();
-    const endpoint = `${wsStart}${backendurl}ws/message/12345/`;
+    const endpoint = `${wsStart}${backendurl}ws/message/${room_id}/`;
     console.log(endpoint);
     const webSocket = new WebSocket(endpoint);
     setWs(webSocket);
@@ -85,9 +105,19 @@ const PeerChat = () => {
           </button>
         </>
       ) : (
-        <button type="submit" onClick={handlesubmit}>
-          join
-        </button>
+        <>
+          <div>
+            <h1>Room List</h1>
+            {roomList.map((room) => (
+              <>
+                <h2>{room.room_id}</h2>
+                <button type="submit" onClick={()=>handlesubmit(room.room_id)}>
+                  Join
+                </button>
+              </>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
