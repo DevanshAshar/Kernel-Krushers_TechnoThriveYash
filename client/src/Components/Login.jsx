@@ -1,17 +1,33 @@
 import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../Context/auth";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username,setUsername]=useState("")
   const [tab, setTab] = useState("login");
-
+  const location = useLocation();
+  const [auth,setAuth]=useAuth()
+  const navigate=useNavigate()
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-        const res=await axios.post(`${process.env.REACT_APP_API}/auth/token/login`,{username:username,password:password})
-        console.log(res.data)
+        const res=await axios.post(`${process.env.REACT_APP_API}/auth/token/login/`,{username:username,password:password}, { withCredentials: true })
+        if(res.status===200)
+        {
+        toast.success("Logged in Successfully", { duration: 5000 });
+        setAuth({
+          ...auth,
+          token: res.data.auth_token,
+        });
+        //console.log(res.data.auth_token)
+        const authToken = res.data.auth_token;
+        console.log(auth)
+        localStorage.setItem("auth",authToken);
+        navigate('/');
+        }
     } catch (error) {
         toast.error('Something went wrong') 
         console.log(error.message)
@@ -22,7 +38,11 @@ const Login = () => {
     e.preventDefault();
     try {
         const res=await axios.post(`${process.env.REACT_APP_API}/auth/users/`,{username:username,email:email,password:password})
-        console.log(res.data)
+        if(res.data===200)
+        {
+          toast.success('Signed up')
+          navigate('/')
+        }
     } catch (error) {
         toast.error('Something went wrong')
         console.log(error.message)

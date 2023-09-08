@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../Context/auth";
 import toast from "react-hot-toast";
 const Header = () => {
+  const auth = useAuth();
+  const [isLoggedIn, setIsLoggedIn] = useState(Boolean(auth[0].token));
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -59,7 +61,14 @@ const Header = () => {
                 <NavLink className="nav-link" to="/chatPg">
                   AI Chatbot
                 </NavLink>
-              </li>              
+              </li>
+              {isLoggedIn ? (
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/chatPg">
+                    Logout
+                  </NavLink>
+                </li>
+              ) : null}
             </ul>
           </div>
         </div>
