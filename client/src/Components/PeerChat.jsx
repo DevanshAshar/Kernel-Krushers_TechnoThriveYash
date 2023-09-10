@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
 import generateUniqueCode from "../utils/GenerateUniqueCode";
 import axios from "axios";
-
+import "../css/peerchat.css";
 const PeerChat = () => {
+
+  function generateUserId(length) {
+    const characters = '0123456789';
+    let userId = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      userId += characters.charAt(randomIndex);
+    }
+    return `User${userId}`;
+  }
+  
+  
+  
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [ws, setWs] = useState(null);
   const [roomList, SetRoomList] = useState([]);
   const [roomId, setRoomId] = useState("");
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
 
   const getRoomList = async () => {
     try {
@@ -29,13 +42,17 @@ const PeerChat = () => {
     if (ws) {
       ws.addEventListener("open", () => {
         console.log("ws opened");
+        const userIdentifier = generateUserId(3); 
+        console.log(userIdentifier)
+        setUsername(userIdentifier)
       });
 
       ws.addEventListener("message", (event) => {
         console.log("message");
         const message = JSON.parse(event.data);
-        console.log(message)
-        setMessages((prevMessages) => [...prevMessages, message.message]);
+        const mess_ws = message.message +"  "+ event.data['user_id']
+        console.log(event.data);
+        setMessages((prevMessages) => [...prevMessages, mess_ws]);
       });
 
       ws.addEventListener("close", () => {
@@ -68,6 +85,8 @@ const PeerChat = () => {
       console.log(messages);
       const jsonStr = JSON.stringify({
         message: message,
+        sentByUser: true,
+        username: username
       });
 
       ws.send(jsonStr);
@@ -85,7 +104,10 @@ const PeerChat = () => {
     <div className="peerchat">
       <div className="message-list">
         {messages.map((message, index) => (
-          <div className="message" key={index}>
+          <div
+            className={`message ${message.sentByUser ? "sent" : "received"}`}
+            key={index}
+          >
             {message}
           </div>
         ))}
@@ -111,7 +133,10 @@ const PeerChat = () => {
             {roomList.map((room) => (
               <>
                 <h2>{room.room_id}</h2>
-                <button type="submit" onClick={()=>handlesubmit(room.room_id)}>
+                <button
+                  type="submit"
+                  onClick={() => handlesubmit(room.room_id)}
+                >
                   Join
                 </button>
               </>
