@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './BreathingCircle.css';
+import Layout from '../Layout/Layout';
 
 const BreathingCircle = () => {
   const [circleText, setCircleText] = useState('Breath In...');
@@ -28,7 +29,8 @@ const BreathingCircle = () => {
   }, []);
 
   return (
-    <div>
+    <Layout>
+    <div className='breathBody'>
       <h1 className="mainH1">Relaxation App</h1>
       <div className={containerClassName}>
         <div className="circleDiv"></div>
@@ -39,6 +41,7 @@ const BreathingCircle = () => {
         <div className="gradientCircle"></div>
       </div>
     </div>
+    </Layout>
   );
 };
 

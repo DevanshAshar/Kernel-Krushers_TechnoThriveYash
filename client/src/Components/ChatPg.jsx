@@ -3,6 +3,7 @@ import '../App.css';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 import intents from '../intents.json';
+import Layout from '../Layout/Layout';
 
 const API_KEY = "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";
 
@@ -114,6 +115,7 @@ const ChatPg = () => {
   
 
   return (
+    <Layout>
     <div className="App">
       <div style={{ height: "650px", width: "1350px" }}>
         <MainContainer>
@@ -131,6 +133,7 @@ const ChatPg = () => {
         </MainContainer>
       </div>
     </div>
+    </Layout>
   );
 };
 
