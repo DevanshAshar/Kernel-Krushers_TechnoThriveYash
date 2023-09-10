@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import generateUniqueCode from "../utils/GenerateUniqueCode";
 import axios from "axios";
 import "../css/peerchat.css";
+
 const PeerChat = () => {
   function generateUserId(length) {
     const characters = "0123456789";
@@ -19,6 +20,7 @@ const PeerChat = () => {
   const [roomList, SetRoomList] = useState([]);
   const [roomId, setRoomId] = useState("");
   const [username, setUsername] = useState("");
+  const [onlineUsers, setOnlineUsers] = useState([]); // State to track online users
 
   const getRoomList = async () => {
     try {
@@ -31,6 +33,16 @@ const PeerChat = () => {
       console.log(error);
     }
   };
+
+  const updateUserList = () => {
+    // Function to update the list of online users
+    const userList = messages
+      .filter((message) => message[1] === "received")
+      .map((message) => message[2]);
+    console.log(userList);
+    setOnlineUsers(Array.from(new Set(userList))); // Remove duplicates and set online users
+  };
+
   useEffect(() => {
     getRoomList();
   }, []);
@@ -39,6 +51,7 @@ const PeerChat = () => {
     if (ws) {
       ws.addEventListener("open", () => {
         console.log("ws opened");
+        setOnlineUsers((prevOnlineUsers) => [...prevOnlineUsers, username]);
       });
 
       ws.addEventListener("message", (event) => {
@@ -47,6 +60,10 @@ const PeerChat = () => {
 
       ws.addEventListener("close", () => {
         console.log("ws closes");
+        const updatedOnlineUsers = onlineUsers.filter(
+          (user) => user !== username
+        );
+        setOnlineUsers(updatedOnlineUsers); // Update user list when a user disconnects
       });
 
       ws.addEventListener("error", (event) => {
@@ -57,16 +74,14 @@ const PeerChat = () => {
   }, [ws]);
 
   const handleSendWS = (event) => {
-    console.log("message");
-    // console.log(user)
     const message = JSON.parse(event.data);
     const mess_ws =
       message.username === username
         ? [message.message, "sent"]
         : [message.message, "received", message.username];
-    console.log(message);
-    console.log(username);
     setMessages((prevMessages) => [...prevMessages, mess_ws]);
+  
+    // Update user list when a new message is received
   };
 
   const handlesubmit = (room_id) => {
@@ -81,6 +96,7 @@ const PeerChat = () => {
     const userIdentifier = generateUserId(3);
     console.log(userIdentifier);
     setUsername(userIdentifier);
+
     setWs(webSocket);
   };
 
@@ -91,6 +107,7 @@ const PeerChat = () => {
         message: message,
         sentByUser: true,
         username: username,
+        onlineusers : onlineUsers
       });
 
       ws.send(jsonStr);
@@ -115,6 +132,14 @@ const PeerChat = () => {
             {message[0]}
           </div>
         ))}
+      </div>
+      <div className="user-list">
+        <h1>Online Users</h1>
+        <ul>
+          {onlineUsers.map((user, index) => (
+            <li style={{color:"black"}} key={index}>{user}</li>   
+          ))}
+        </ul>
       </div>
       {ws ? (
         <>
