@@ -36,6 +36,7 @@ box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .message{
+width: fit-content;
 background-color: #ffffff;
 padding: 10px;
 margin: 5px 0;
@@ -46,17 +47,20 @@ border-radius: 5px;
     background-color: #00dd63e0; /* Sent message background color */
     color: #000000; /* Text color for sent messages */
     align-self: flex-end; 
-    text-align: right;/* Right-align sent messages */
+    text-align: right;
+    margin-left: auto;/* Right-align sent messages */
 }
   
 .message.received {
     background-color: #ffaf36; /* Received message background color */
     color: #2c2c2c; /* Text color for received messages */
     align-self: flex-start; 
-    text-align: left;/* Left-align received messages */
+    text-align: left;
+    margin-right: auto;
+    /* Left-align received messages */
   }
 
-  .username {
+.username {
     background-color: #fffb00; /* Username background color */
     padding: 5px;
     border-radius: 5px;
@@ -74,18 +78,7 @@ border-radius: 5px;
 margin: 10px 0;
 }
 
-button[type="submit"] {
-padding: 10px 20px;
-background-color: #007bff; /* Button background color */
-color: #fff;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-}
 
-button[type="submit"]:hover {
-background-color: #0056b3; /* Button background color on hover */
-}
 
 /* Room List Styles */
 .room-list {

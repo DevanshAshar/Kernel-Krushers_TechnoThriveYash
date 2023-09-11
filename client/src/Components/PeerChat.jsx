@@ -165,13 +165,18 @@ const PeerChat = () => {
               <h1>Room List</h1>
               {roomList.map((room) => (
                 <>
-                  <h2>{room.room_id}</h2>
-                  <button
-                    type="submit"
-                    onClick={() => handlesubmit(room.room_id)}
-                  >
-                    Join
-                  </button>
+                  <div className="card" style={{ width: "10rem" }}>
+                    <div className="card-body">
+                      <h5 className="card-title">{room.room_id}</h5>
+                      <button
+                        type="submit"
+                        className="btn btn-success"
+                        onClick={() => handlesubmit(room.room_id)}
+                      >
+                        Join
+                      </button>
+                    </div>
+                  </div>
                 </>
               ))}
             </div>
