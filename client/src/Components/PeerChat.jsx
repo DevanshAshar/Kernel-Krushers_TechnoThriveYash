@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import generateUniqueCode from "../utils/GenerateUniqueCode";
 import axios from "axios";
+import Layout from "../Layout/Layout.jsx";
 import "../css/peerchat.css";
 
 const PeerChat = () => {
@@ -80,7 +81,7 @@ const PeerChat = () => {
         ? [message.message, "sent"]
         : [message.message, "received", message.username];
     setMessages((prevMessages) => [...prevMessages, mess_ws]);
-  
+
     // Update user list when a new message is received
   };
 
@@ -107,7 +108,7 @@ const PeerChat = () => {
         message: message,
         sentByUser: true,
         username: username,
-        onlineusers : onlineUsers
+        onlineusers: onlineUsers,
       });
 
       ws.send(jsonStr);
@@ -122,58 +123,62 @@ const PeerChat = () => {
   };
 
   return (
-    <div className="peerchat">
-      <div className="message-list">
-        {messages.map((message, index) => (
-          <div className={`message ${message[1]}`} key={index}>
-            {message[1] === "received" && (
-              <div className="username">{message[2]}</div>
-            )}
-            {message[0]}
-          </div>
-        ))}
-      </div>
-      <div className="user-list">
-        <h1>Online Users</h1>
-        <ul>
-          {onlineUsers.map((user, index) => (
-            <li style={{color:"black"}} key={index}>{user}</li>   
-          ))}
-        </ul>
-      </div>
-      {ws ? (
-        <>
-          <input
-            autoFocus
-            required
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
-          />
-          <button type="submit" onClick={() => handleSendMessage(newMessage)}>
-            send
-          </button>
-        </>
-      ) : (
-        <>
-          <div>
-            <h1>Room List</h1>
-            {roomList.map((room) => (
-              <>
-                <h2>{room.room_id}</h2>
-                <button
-                  type="submit"
-                  onClick={() => handlesubmit(room.room_id)}
-                >
-                  Join
-                </button>
-              </>
+    <Layout>
+      <div className="peerchat">
+        <div className="user-list">
+          <h1>Online Users</h1>
+          <ul>
+            {onlineUsers.map((user, index) => (
+              <li style={{ color: "black" }} key={index}>
+                {user}
+              </li>
             ))}
-          </div>
-        </>
-      )}
-    </div>
+          </ul>
+        </div>
+        {ws ? (
+          <>
+            <div className="message-list">
+              {messages.map((message, index) => (
+                <div className={`message ${message[1]}`} key={index}>
+                  {message[1] === "received" && (
+                    <div className="username">{message[2]}</div>
+                  )}
+                  {message[0]}
+                </div>
+              ))}
+            </div>
+            <input
+              autoFocus
+              required
+              type="text"
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              onKeyPress={handleKeyPress}
+            />
+            <button type="submit" onClick={() => handleSendMessage(newMessage)}>
+              send
+            </button>
+          </>
+        ) : (
+          <>
+            <div>
+              <h1>Room List</h1>
+              {roomList.map((room) => (
+                <>
+                  <h2>{room.room_id}</h2>
+                  <button
+                    type="submit"
+                    onClick={() => handlesubmit(room.room_id)}
+                  >
+                    Join
+                  </button>
+                </>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    </Layout>
   );
 };
 
