@@ -11,7 +11,7 @@
         "responses": ["I'm just a computer program, so I don't have feelings, but I'm here to help you. How are you feeling today?", "I'm here to assist you. How are you doing?", "I'm doing well. How can I assist you today?"]
       },
       {
-        "tag": "mental_health_info",
+        "tag": "mental_health",
         "patterns": ["Tell me about mental health", "What is mental health?", "Explain mental wellness"],
         "responses": ["Mental health refers to emotional, psychological, and social well-being. It affects how we think, feel, and act. If you have questions or need support, feel free to ask.", "Mental health is crucial for overall well-being. It encompasses emotional and psychological well-being. If you have specific questions or concerns, please let me know."]
       },

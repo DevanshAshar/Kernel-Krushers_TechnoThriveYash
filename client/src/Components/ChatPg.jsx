@@ -60,20 +60,28 @@ const ChatPg = () => {
       // Determine intent based on user message
       let detectedIntent = null;
       if (intents) {
-        for (const intent in intents) {
-          const examples = intents[intent].examples;
-          if (examples && Array.isArray(examples) && examples.includes(lastUserMessage.message)) {
+        for (const intent of intents.intents) {
+          console.log("intent 1") // Change 'in' to 'of' for iterating over intents
+          console.log(intent)
+          const patterns = intent.patterns;
+          if (patterns && Array.isArray(patterns) && patterns.includes(lastUserMessage.message)) {
             detectedIntent = intent;
+            console.log("hello_intent")
             break;
           }
         }
       }
-  
+    
       // Use the detected intent to generate a response
       let chatGPTResponse = "I'm not sure how to respond to that.";
       if (detectedIntent) {
-        chatGPTResponse = intents[detectedIntent].response;
-      } else {
+        const responses = detectedIntent.responses;
+        const randomResponse = responses[Math.floor(Math.random() * responses.length)]; // Choose a random response
+        chatGPTResponse = randomResponse;
+        console.log("hello_random")
+      } 
+      else {
+        console.log("hello_api")
         // If no intent is detected, send the message to the API
         const apiMessages = chatMessages.map((messageObject) => {
           let role = "";
