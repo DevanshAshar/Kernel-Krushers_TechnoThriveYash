@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import '../App.css';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
 import intents from '../intents.json';
 import Layout from '../Layout/Layout';
-
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import MicIcon from '@mui/icons-material/Mic';
+import SendIcon from '@mui/icons-material/Send';
 const API_KEY = "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";
 
 const systemMessage = {
@@ -21,6 +23,16 @@ const ChatPg = () => {
     }
   ]);
   const [isTyping, setIsTyping] = useState(false);
+  const [transcribedMessage, setTranscribedMessage] = useState('');
+  const messageInputRef = useRef(null);
+
+  const { transcript, resetTranscript } = useSpeechRecognition();
+
+  useEffect(() => {
+    if (transcript) {
+      setTranscribedMessage(transcript);
+    }
+  }, [transcript]);
 
   const handleSend = async (message) => {
     const newMessage = {
@@ -112,28 +124,58 @@ const ChatPg = () => {
   
     setIsTyping(false);
   }
-  
+
+  const handleMicClick = () => {
+    if (!isTyping) {
+      SpeechRecognition.startListening();
+    } else {
+      SpeechRecognition.stopListening();
+    }
+  };
+
+  const handleTranscribedMessageSubmit = () => {
+    if (transcribedMessage) {
+      handleSend(transcribedMessage);
+      resetTranscript(); // Reset the transcript after sending
+      setTranscribedMessage('');
+    }
+  };
 
   return (
     <Layout>
-    <div className="App">
-      <div style={{ height: "650px", width: "1350px" }}>
-        <MainContainer>
-          <ChatContainer>
-            <MessageList
-              scrollBehavior="smooth"
-              typingIndicator={isTyping ? <TypingIndicator content="ChatGPT is typing" /> : null}
-            >
-              {messages.map((message, i) => {
-                return <Message key={i} model={message} />
-              })}
-            </MessageList>
-            <MessageInput placeholder="Type message here" onSend={handleSend} />
-          </ChatContainer>
-        </MainContainer>
+  <div className="App">
+    <div style={{ height: "650px", width: "1350px", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+      <MainContainer style={{ flex: "1", overflowY: "scroll" }}>
+        <ChatContainer>
+          <MessageList
+            scrollBehavior="smooth"
+            typingIndicator={isTyping ? <TypingIndicator content="ChatGPT is typing" /> : null}
+          >
+            {messages.map((message, i) => {
+              return <Message key={i} model={message} />
+            })}
+          </MessageList>
+        </ChatContainer>
+      </MainContainer>
+      <div style={{ display: "flex", alignItems: "center", padding: "10px" }}>
+        <input
+          placeholder="Type message here"
+          value={transcribedMessage}
+          onChange={(e) => setTranscribedMessage(e.target.value)}
+          style={{ flex: "1", marginRight: "10px", padding: "5px" }}
+          ref={messageInputRef}
+        />
+        <button className="mic-button btn btn-primary" onClick={handleMicClick}>
+          <MicIcon/>
+        </button>
+        <button className="send-button btn btn-success" onClick={handleTranscribedMessageSubmit}>
+          <SendIcon/>
+        </button>
       </div>
     </div>
-    </Layout>
+  </div>
+</Layout>
+
   );
 };
 
