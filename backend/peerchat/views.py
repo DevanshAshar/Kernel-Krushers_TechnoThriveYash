@@ -46,9 +46,10 @@ class ChatCSV(APIView):
     def get(self, request):
         try:
             # Retrieve data from the database
-            queryset = ChatResponse.objects.all()
+            queryset = ChatResponse.objects.filter(user= request.user)
             serializer = ChatResponseSerializer(queryset, many=True)
             data = serializer.data
+            print(data)
             filename = f"data_{request.user}.csv"
             file_path = os.path.join("csv_files", filename).replace("\\", "/")
             file_exists = os.path.isfile(file_path)
