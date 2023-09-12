@@ -6,22 +6,22 @@
         "responses": ["Hello! How can I assist you today?", "Hi! How can I help you?", "Hello there! How can I support you with your mental health?"]
       },
       {
-        "tag": "how_are_you",
+        "tag": "how are you",
         "patterns": ["How are you?", "Are you okay?", "How's it going?"],
         "responses": ["I'm just a computer program, so I don't have feelings, but I'm here to help you. How are you feeling today?", "I'm here to assist you. How are you doing?", "I'm doing well. How can I assist you today?"]
       },
       {
-        "tag": "mental_health",
+        "tag": "mental health",
         "patterns": ["Tell me about mental health", "What is mental health?", "Explain mental wellness"],
         "responses": ["Mental health refers to emotional, psychological, and social well-being. It affects how we think, feel, and act. If you have questions or need support, feel free to ask.", "Mental health is crucial for overall well-being. It encompasses emotional and psychological well-being. If you have specific questions or concerns, please let me know."]
       },
       {
-        "tag": "mental_health_tips",
+        "tag": "mental health tips",
         "patterns": ["Give me some mental health tips", "How can I improve my mental health?", "Tips for better mental well-being"],
         "responses": ["Certainly! Here are some tips for better mental health: 1. Practice mindfulness and relaxation techniques. 2. Stay physically active. 3. Maintain a balanced diet. 4. Connect with loved ones. 5. Seek professional help when needed. How else can I assist you today?"]
       },
       {
-        "tag": "thank_you",
+        "tag": "thankyou",
         "patterns": ["Thank you", "Thanks", "Appreciate it"],
         "responses": ["You're welcome! If you have more questions or need assistance in the future, don't hesitate to reach out. Take care!"]
       },

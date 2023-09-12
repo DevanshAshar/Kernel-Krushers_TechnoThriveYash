@@ -64,7 +64,8 @@ const ChatPg = () => {
           console.log("intent 1") // Change 'in' to 'of' for iterating over intents
           console.log(intent)
           const patterns = intent.patterns;
-          if (patterns && Array.isArray(patterns) && patterns.includes(lastUserMessage.message)) {
+          const tag = intent.tag;
+          if ((patterns.includes(lastUserMessage.message) || tag.includes(lastUserMessage.message))) {
             detectedIntent = intent;
             console.log("hello_intent")
             break;
