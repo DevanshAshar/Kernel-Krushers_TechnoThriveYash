@@ -42,12 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     #installed apps
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
     'corsheaders',
+    'cloudinary',
     #created app
     'user',
     'peerchat',
@@ -150,4 +152,11 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
+}
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dztwsdfiz',
+    'API_KEY': '996593567246431',
+    'API_SECRET': 'aLCza1AhLq3ppqkRRD_bb8poX7w'
 }
