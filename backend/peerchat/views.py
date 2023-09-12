@@ -7,7 +7,20 @@ from .models import Room, ChatResponse
 from .serializers import RoomSerializer, ChatResponseSerializer
 from rest_framework.permissions import IsAuthenticated
 from django.http import HttpResponse
+from rest_framework import status
+from datetime import datetime
 import csv
+import uuid
+import os
+import cloudinary
+import cloudinary.uploader
+
+
+cloudinary.config( 
+  cloud_name = "dztwsdfiz", 
+  api_key = "996593567246431", 
+  api_secret = "aLCza1AhLq3ppqkRRD_bb8poX7w" 
+)
 
 # Create your views here.
 
@@ -29,37 +42,40 @@ class ChatAPI(generics.GenericAPIView,CreateModelMixin,ListModelMixin):
         return super().create(request, *args, **kwargs)
     
 class ChatCSV(APIView):
-    
+    permission_classes = [IsAuthenticated]
     def get(self, request):
-        # Retrieve data from the database
-        queryset = ChatResponse.objects.all()
-        serializer = ChatResponseSerializer(queryset, many=True)
+        try:
+            # Retrieve data from the database
+            queryset = ChatResponse.objects.all()
+            serializer = ChatResponseSerializer(queryset, many=True)
+            data = serializer.data
+            filename = f"data_{request.user}.csv"
+            file_path = os.path.join("csv_files", filename).replace("\\", "/")
+            file_exists = os.path.isfile(file_path)
+            current_timestamp = datetime.now().strftime('%Y-%m-%d')
+            # Create and write data to the CSV file
+            with open(file_path, mode='a', newline='') as csv_file:
+                writer = csv.writer(csv_file)
+                if not file_exists:
+                    writer.writerow(["Timestamp","user","prompt","response"])  # Write header only if the file is newly created
+                for row in data:
+                    writer.writerow([current_timestamp,request.user,row['prompt'],row['response']])
+
+            upload_result = cloudinary.uploader.upload(
+                file_path, 
+                resource_type="raw", 
+                public_id=file_path,  # Set the custom filename
+                overwrite=True  # Overwrite if a file with the same name exists
+            )
+            # Send the URL of the CSV file to the admin user
+            admin_email = "admin@example.com"  # Replace with the admin's email
+            csv_url = upload_result['secure_url']
+            return Response({'csv_url': csv_url}, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({"message":'exception',"exception":str(e)}, status=status.HTTP_501_NOT_IMPLEMENTED)
         
-        # Create a CSV response
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="{request.user}.csv"'
-        
-        # Create a CSV writer and write data to the response
-        writer = csv.writer(response)
-        writer.writerow(['prompt', 'response','user'])  # CSV header row
-        for item in serializer.data:
-            writer.writerow([item['prompt'], item['response'], request.user])  # Add more fields as needed
-        
-        return response
 
     
-    def post(self, request):
-        # Assuming you want to update the CSV file with new data from the request
-        data = request.data
-        
-        # Your code to process and validate the data
-        
-        # Write the updated data to the CSV file
-        with open('yourdata.csv', 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow(['prompt', 'response'])  # CSV header row
-            for row in data:
-                writer.writerow([row['prompt'], row['response']])  # Add more fields as needed
-        
-        return Response({'message': 'CSV file updated successfully'})
+
+
     
