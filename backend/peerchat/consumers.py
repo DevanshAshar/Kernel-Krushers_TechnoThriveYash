@@ -1,4 +1,6 @@
 import json
+import random
+import string
 from datetime import datetime, timedelta, timezone
 from channels.generic.websocket import AsyncWebsocketConsumer
 from user.models import User
@@ -48,16 +50,38 @@ class ChatConsumer(AsyncWebsocketConsumer):
         print('send and recieve')
         text_data = json.loads(text_data)
         message = text_data['message']
-        
+        sent_by_user = text_data.get("sentByUser", False)
+        username = text_data.get('username','anonymous')
+        onlineusers = text_data.get('onlineusers',[])
+        print(sent_by_user,'in send recieve')
         await self.channel_layer.group_send(
-            self.room_group_name, {"type": "chat.message", "message": message}
+            self.room_group_name, {
+                "type": "chat.message", 
+                "message": message,
+                'sentByUser': sent_by_user,
+                'username': username,
+                'onlineusers':onlineusers
+                }
         )
         
     async def chat_message(self,event):
         print('chatting')
         message = event['message']
+        sent_by_user = event.get('sentByUser', False)
+        username = event.get('username','anonymous')
+        onlineusers = event.get('onlineusers',[])
+        print(sent_by_user)
+        await self.send(text_data=json.dumps(
+            {
+                "message": message,
+                'sentByUser': sent_by_user,
+                'username': username,
+                'onlineusers': onlineusers
+             }))
         
-        await self.send(text_data=json.dumps({"message": message}))
-        
+    def generate_user_id(self):
+        # Generate a random user identifier (e.g., "User123")
+        user_id = ''.join(random.choice(string.digits) for _ in range(4))
+        return f"User{user_id}"
         
         

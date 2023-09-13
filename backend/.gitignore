@@ -1,3 +1,5 @@
 .venv
 db.sqlite3
 __pycache__
+.env
+model/sentiment_analysis_model.pkl

@@ -1,11 +1,21 @@
 import torch
+import pickle
 from transformers import BertTokenizer, BertForSequenceClassification
 
 # Load pre-trained BERT model and tokenizer
 model1 = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2)
 tokenizer1 = BertTokenizer.from_pretrained('bert-base-uncased')
 
+
+# Save the model and tokenizer to a pickle file
+with open('backend/model/sentiment_analysis_model.pkl', 'wb') as f:
+    pickle.dump({
+        'model': model1,
+        'tokenizer': tokenizer1
+    }, f)
 # Define a function for predicting sentiment of text
+
+
 def predict_sentiment(text):
     # Tokenize text and convert to input ids and attention mask
     inputs = tokenizer1(text, return_tensors='pt')
@@ -19,8 +29,6 @@ def predict_sentiment(text):
     
     # Determine sentiment label based on highest probability
     sentiment = 'Negative' if probs[1] > probs[0] else 'Positive'
-    print(sentiment)
-
+    # print(sentiment)
     return sentiment
 
-predict_sentiment('i am feeling unhappy.')

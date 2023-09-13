@@ -7,7 +7,7 @@ import Layout from '../Layout/Layout';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import MicIcon from '@mui/icons-material/Mic';
 import SendIcon from '@mui/icons-material/Send';
-const API_KEY = "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";
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const systemMessage = {
   "role": "system",
