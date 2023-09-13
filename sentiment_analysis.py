@@ -18,9 +18,9 @@ def predict_sentiment(text):
     probs = torch.softmax(logits, dim=1).tolist()[0]
     
     # Determine sentiment label based on highest probability
-    sentiment = 'Positive' if probs[1] > probs[0] else 'Negative'
+    sentiment = 'Negative' if probs[1] > probs[0] else 'Positive'
     print(sentiment)
 
     return sentiment
 
-#predict_sentiment('enter the sentance')
+predict_sentiment('i am feeling unhappy.')
