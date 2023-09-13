@@ -28,7 +28,7 @@
           ]
       },
       {
-          "tag": ["stress", "stressed"],
+          "tag": "stress",
           "patterns": ["I am feeling stressed.", "Suggest me ways to live a stressless life."],
           "responses": [
               "Stress is a common response to various life situations, and managing it is essential for your well-being. Here are some strategies that may help you cope with stress: Exercise: Aerobic exercise is very good for boosting your mood. A brisk walk in the fresh air is good for this. Some ideas for aerobic exercise are walking, jogging, bicycling, swimming, or any other activity that gets you moving and helps maintain a regular schedule. Meditation: Some forms of meditation tend to calm the mind and encourage a sense of relaxation and peace of mind.",
@@ -36,7 +36,15 @@
           ]
       },
       {
-          "tag": ["anxiety", "anxious"],
+        "tag": "stressed",
+        "patterns": ["I am feeling stressed.", "Suggest me ways to live a stressless life."],
+        "responses": [
+            "Stress is a common response to various life situations, and managing it is essential for your well-being. Here are some strategies that may help you cope with stress: Exercise: Aerobic exercise is very good for boosting your mood. A brisk walk in the fresh air is good for this. Some ideas for aerobic exercise are walking, jogging, bicycling, swimming, or any other activity that gets you moving and helps maintain a regular schedule. Meditation: Some forms of meditation tend to calm the mind and encourage a sense of relaxation and peace of mind.",
+            "Stress is a common response to various life situations, and managing it is essential for your well-being. Here are some strategies that may help you cope with stress: Surround yourself with good vibes. Turn on some music. Take a walk around the block. Breathe deeply. Do something that you enjoy. Take a shower. Write down all the things that you are grateful for."
+        ]
+      },
+      {
+          "tag": "anxiety",
           "patterns": ["I am feeling anxious.", "Suggest me ways to overcome anxiety."],
           "responses": [
               "Here are some things that you can try to alleviate anxiety: Relaxing and getting some rest. Giving yourself a task. Meditating. Get away from it all. Write it all down. Ask for help. Start a new habit. Talk to a friend about it.",
@@ -44,11 +52,26 @@
           ]
       },
       {
-          "tag": ["suicide", "suicidal thoughts"],
+        "tag": "anxious",
+        "patterns": ["I am feeling anxious.", "Suggest me ways to overcome anxiety."],
+        "responses": [
+            "Here are some things that you can try to alleviate anxiety: Relaxing and getting some rest. Giving yourself a task. Meditating. Get away from it all. Write it all down. Ask for help. Start a new habit. Talk to a friend about it.",
+            "Here are some things that you can try to alleviate anxiety: Deep Breathing: Take slow, deep breaths to calm your nervous system. Inhale deeply through your nose for a count of four, hold for four, and exhale through your mouth for a count of four. Repeat this several times. Mindfulness Meditation: Try mindfulness meditation to stay in the present moment. Focusing on your breath or a calming visualization can help reduce anxiety. Physical Activity: Engaging in regular physical activity can help reduce anxiety by releasing endorphins, which are natural mood lifters. Even a short walk can make a difference. Progressive Muscle Relaxation: Tense and then release different muscle groups in your body to help relax physically, which can have a positive effect on your mental state. Limit Stimulants: Reduce or eliminate the consumption of caffeine and other stimulants, as they can increase feelings of anxiety."
+        ]
+      },
+      {
+          "tag": "suicidal thoughts",
           "patterns": ["I am having suicidal thoughts.", "I want to commit suicide."],
           "responses": [
               "I can't provide the help that you need. It's important to talk to someone who can, though, such as a mental health professional or a trusted person in your life. Please consider reaching out to a friend, family member, or a mental health crisis hotline immediately. The Union Social Justice and Empowerment Ministry Helpline provides 24/7, free and confidential support for people in distress, prevention, and crisis resources for you or your loved ones. Please call: 1800-121-3667 or 1800-599-0019"
           ]
+      },
+      {
+        "tag": "suicide",
+        "patterns": ["I am having suicidal thoughts.", "I want to commit suicide."],
+        "responses": [
+            "I can't provide the help that you need. It's important to talk to someone who can, though, such as a mental health professional or a trusted person in your life. Please consider reaching out to a friend, family member, or a mental health crisis hotline immediately. The Union Social Justice and Empowerment Ministry Helpline provides 24/7, free and confidential support for people in distress, prevention, and crisis resources for you or your loved ones. Please call: 1800-121-3667 or 1800-599-0019"
+        ]
       },
       {
           "tag": "mental health",
