@@ -1,8 +1,7 @@
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.utils.html import strip_tags
 from django.core.mail import send_mail
 from .models import ChatResponse
-from .serializers import ChatResponseSerializer
 from user.models import User
 from datetime import datetime
 from decouple import config
@@ -10,6 +9,7 @@ import cloudinary
 import cloudinary.uploader
 import csv
 import os
+import requests
 
 cloudinary.config( 
   cloud_name = config('CLOUD_NAME'), 
@@ -19,10 +19,11 @@ cloudinary.config(
 
 
 def create_csv(username):
+    # from .serializers import ChatResponseSerializer
     queryset = ChatResponse.objects.filter(user=User.objects.get(username=username))
-    serializer = ChatResponseSerializer(queryset, many=True)
-    data = serializer.data
-    print(data)
+    # serializer = ChatResponseSerializer(queryset, many=True)
+    # data = serializer.data
+    print(queryset[0].response)
     filename = f"data_{username}.csv"
     file_path = os.path.join("csv_files", filename).replace("\\", "/")
     file_exists = os.path.isfile(file_path)
@@ -32,8 +33,8 @@ def create_csv(username):
         writer = csv.writer(csv_file)
         if not file_exists:
             writer.writerow(["Timestamp","user","prompt","response"])
-        for row in data:
-            writer.writerow([current_timestamp,request.user,row['prompt'],row['response']])
+        for row in queryset:
+            writer.writerow([current_timestamp,username,row.prompt,row.response])
 
     upload_result = cloudinary.uploader.upload(
         file_path, 
@@ -41,9 +42,8 @@ def create_csv(username):
         public_id=file_path,  # Set the custom filename
         overwrite=True  # Overwriting the file if it exists
     )
-    # Send the URL of the CSV file to the therapist
-    admin_email = "therapist@example.com"  # Replace with the therapist email
     csv_url = upload_result['secure_url']
+    return csv_url
 
 def user_send_mail(username,recipient_mail):
     subject = 'Support for Managing Stress'
@@ -85,4 +85,58 @@ def user_send_mail(username,recipient_mail):
         recipient_list,
         html_message=html_message,
     )
+    
+def send_therapist_email(therapist_email,username,user_email,csv_url):
+    subject = f'User Alert ({username}): Increased Chatbot Usage and problem is not solved'
+
+    # Customize the message with HTML tags
+    html_message = f"""
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Alert: Increased Chatbot Usage</title>
+    </head>
+    <body>
+        <p>Dear Therapist,</p>
+        <p>We would like to bring to your attention that the user <strong>{username}</strong> (email: <a href="mailto:{user_email}">{user_email}</a>) is increasingly using the chatbot and has provided the following problem description:</p>
+        <p>For the problem description we have attached a file having user messages for your reference:</p>
+        
+        <!-- Add a file icon and download button -->
+        <p>
+            <a href="{csv_url}" style="text-decoration: none; background-color: #007BFF; color: #ffffff; padding: 10px 15px; border-radius: 5px; font-weight: bold; display: inline-block;">
+                <img src="https://example.com/file-icon.png" alt="File Icon" width="32" height="32" style="vertical-align: middle;"> Download File
+            </a>
+        </p>
+        
+        <p>Please consider reaching out to the user to provide assistance as needed.</p>
+        <p>Thank you for your support.</p>
+        <p>Sincerely,<br>PeacefulPal Support Team</p>
+    </body>
+    </html>
+    """
+
+    from_email = config("EMAIL_HOST_USER")  # This should be the same as EMAIL_HOST_USER
+    recipient_list = [therapist_email]  # Replace with the therapist's email address
+
+    # Create an EmailMessage instance
+   
+    
+    send_mail(
+        subject,
+        strip_tags(html_message),
+        from_email,
+        recipient_list,
+        html_message=html_message,
+    )
+
+    # Attach the file to the email
+ # Attach the file uploaded by the user
+
+    # Send the email
+    # email.send()
+    
+# send_therapist_email('hi')
 

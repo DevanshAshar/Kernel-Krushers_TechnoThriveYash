@@ -49,7 +49,9 @@ class ChatCSV(APIView):
             queryset = ChatResponse.objects.filter(user= request.user)
             serializer = ChatResponseSerializer(queryset, many=True)
             data = serializer.data
-            print(data)
+            for i in queryset:
+                print(i.response)
+            print(queryset[0].response)
             filename = f"data_{request.user}.csv"
             file_path = os.path.join("csv_files", filename).replace("\\", "/")
             file_exists = os.path.isfile(file_path)
@@ -59,8 +61,8 @@ class ChatCSV(APIView):
                 writer = csv.writer(csv_file)
                 if not file_exists:
                     writer.writerow(["Timestamp","user","prompt","response"])
-                for row in data:
-                    writer.writerow([current_timestamp,request.user,row['prompt'],row['response']])
+                for row in queryset:
+                    writer.writerow([current_timestamp,request.user,row.prompt,row.response])
 
             upload_result = cloudinary.uploader.upload(
                 file_path, 

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .email import user_send_mail
+from .email import user_send_mail,send_therapist_email
 from .sentiment_analysis import predict_sentiment
 from user.models import User
 from .models import *
@@ -29,6 +29,7 @@ class ChatResponseSerializer(serializers.ModelSerializer):
             user.save()
         if user.stress_count >=3:
             user_send_mail(user.username,user.email)
+        send_therapist_email('scarlettwitch031@gmail.com',user.username,user.email,'https://res.cloudinary.com/dztwsdfiz/raw/upload/v1694679782/csv_files/data_admin.csv')
         print(user.stress_count)
         print(response)
         validated_data['user'] = self.context.get('request').user
