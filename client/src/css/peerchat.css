@@ -46,7 +46,8 @@ border-radius: 5px;
 .message.sent {
     background-color: #00dd63e0; /* Sent message background color */
     color: #000000; /* Text color for sent messages */
-    align-self: flex-end; 
+    align-self: flex-end;
+    font-size: larger; 
     text-align: right;
     margin-left: auto;/* Right-align sent messages */
 }

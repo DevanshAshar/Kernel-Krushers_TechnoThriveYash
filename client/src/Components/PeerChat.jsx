@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import generateUniqueCode from "../utils/GenerateUniqueCode";
 import axios from "axios";
 import Layout from "../Layout/Layout.jsx";
 import "../css/peerchat.css";
-import SendIcon from '@mui/icons-material/Send';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import SendIcon from "@mui/icons-material/Send";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import toast from "react-hot-toast";
 const PeerChat = () => {
+  const navigate = useNavigate();
   function generateUserId(length) {
     const characters = "0123456789";
     let userId = "";
@@ -17,6 +20,7 @@ const PeerChat = () => {
   }
 
   const [messages, setMessages] = useState([]);
+  const [err, setErr] = useState("");
   const [newMessage, setNewMessage] = useState("");
   const [ws, setWs] = useState(null);
   const [roomList, SetRoomList] = useState([]);
@@ -66,6 +70,7 @@ const PeerChat = () => {
           (user) => user !== username
         );
         setOnlineUsers(updatedOnlineUsers); // Update user list when a user disconnects
+        window.location.reload();
       });
 
       ws.addEventListener("error", (event) => {
@@ -77,6 +82,10 @@ const PeerChat = () => {
 
   const handleSendWS = (event) => {
     const message = JSON.parse(event.data);
+    console.log(message.status);
+    if (message.status === 400 || message.status === 404) {
+      setErr(message.message);
+    }
     const mess_ws =
       message.username === username
         ? [message.message, "sent"]
@@ -123,73 +132,94 @@ const PeerChat = () => {
     }
   };
 
+  const handleLeave = () => {
+    console.log("disconnect");
+    ws.close();
+  };
+
+  const handleErr = (err) =>{
+    console.log('error')
+    toast.error(err)
+  }
   return (
     <Layout>
-      <div className="peerchat">
-        <div className="user-list">
-          <h1>Online Users</h1>
-          <ul>
-            {onlineUsers.map((user, index) => (
-              <li style={{ color: "black" }} key={index}>
-                {user}
-              </li>
-            ))}
-          </ul>
-        </div>
-        {ws ? (
-          <>
-            <div className="message-list">
-              {messages.map((message, index) => (
-                <div className={`message ${message[1]}`} key={index}>
-                  {message[1] === "received" && (
-                    <div className="username">{message[2]}</div>
-                  )}
-                  {message[0]}
-                </div>
+      {err ? (
+        <>{handleErr(err)}</>
+      ) : (
+        <div className="peerchat">
+          <div className="user-list">
+            <h1>Online Users</h1>
+            <ul>
+              {onlineUsers.map((user, index) => (
+                <li style={{ color: "black" }} key={index}>
+                  {user}
+                </li>
               ))}
-            </div>
-            <div className="d d-flex">
-            <input
-              autoFocus
-              required
-              style={{width:'80vw'}}
-              type="text"
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
-            />
-            <button className="btn btn-success" type="submit" onClick={() => handleSendMessage(newMessage)}>
-              <SendIcon/>
-            </button>
-            <button className="btn btn-primary">
-                    <ExitToAppIcon/>
-            </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <div>
-              <h1>Room List</h1>
-              {roomList.map((room) => (
-                <>
-                  <div className="card" style={{ width: "10rem" }}>
-                    <div className="card-body">
-                      <h5 className="card-title">{room.room_id}</h5>
-                      <button
-                        type="submit"
-                        className="btn btn-success"
-                        onClick={() => handlesubmit(room.room_id)}
-                      >
-                        Join
-                      </button>
-                    </div>
+            </ul>
+          </div>
+          {ws ? (
+            <>
+              <div className="message-list">
+                {messages.map((message, index) => (
+                  <div className={`message ${message[1]}`} key={index}>
+                    {message[1] === "received" && (
+                      <div className="username">{message[2]}</div>
+                    )}
+                    {message[0]}
                   </div>
-                </>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
+                ))}
+              </div>
+              <div className="d d-flex">
+                <input
+                  autoFocus
+                  required
+                  style={{ width: "80vw" }}
+                  type="text"
+                  value={newMessage}
+                  onChange={(e) => setNewMessage(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                />
+                <button
+                  className="btn btn-success"
+                  type="submit"
+                  onClick={() => handleSendMessage(newMessage)}
+                >
+                  <SendIcon />
+                </button>
+                <button
+                  className="btn btn-primary"
+                  type="submit"
+                  onClick={handleLeave}
+                >
+                  <ExitToAppIcon />
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                <h1>Room List</h1>
+                {roomList.map((room) => (
+                  <>
+                    <div className="card" style={{ width: "10rem" }}>
+                      <div className="card-body">
+                        <h5 className="card-title">{room.room_id}</h5>
+                        <button
+                          type="submit"
+                          className="btn btn-success"
+                          onClick={() => handlesubmit(room.room_id)}
+                        >
+                          Join
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      )}
     </Layout>
   );
 };
