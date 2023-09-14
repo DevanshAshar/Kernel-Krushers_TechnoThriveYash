@@ -15,6 +15,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         print(self.lobby_code)
         self.room_group_name = self.lobby_code
         self.room = await sync_to_async(Room.objects.filter(room_id=self.lobby_code).first)()
+        print(self.room.user_count)
         print('sdf')
         if not self.room:
                 await self.accept()
