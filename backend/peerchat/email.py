@@ -46,6 +46,7 @@ def create_csv(username):
     return csv_url
 
 def user_send_mail(username,recipient_mail):
+    
     subject = 'Support for Managing Stress'
     user = User.objects.get(username=username)
     user.stress_count = 0
@@ -86,9 +87,9 @@ def user_send_mail(username,recipient_mail):
         html_message=html_message,
     )
     
-def send_therapist_email(therapist_email,username,user_email,csv_url):
+def send_therapist_email(therapist_email,username,user_email):
     subject = f'User Alert ({username}): Increased Chatbot Usage and problem is not solved'
-
+    print(create_csv(username))
     # Customize the message with HTML tags
     html_message = f"""
     <!DOCTYPE html>
@@ -106,7 +107,7 @@ def send_therapist_email(therapist_email,username,user_email,csv_url):
         
         <!-- Add a file icon and download button -->
         <p>
-            <a href="{csv_url}" style="text-decoration: none; background-color: #007BFF; color: #ffffff; padding: 10px 15px; border-radius: 5px; font-weight: bold; display: inline-block;">
+            <a href="{create_csv(username)}" style="text-decoration: none; background-color: #007BFF; color: #ffffff; padding: 10px 15px; border-radius: 5px; font-weight: bold; display: inline-block;">
                 <img src="https://example.com/file-icon.png" alt="File Icon" width="32" height="32" style="vertical-align: middle;"> Download File
             </a>
         </p>

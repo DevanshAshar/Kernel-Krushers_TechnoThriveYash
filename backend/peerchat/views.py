@@ -73,6 +73,7 @@ class ChatCSV(APIView):
             # Send the URL of the CSV file to the therapist
             admin_email = "therapist@example.com"  # Replace with the therapist email
             csv_url = upload_result['secure_url']
+            print(csv_url,type(csv_url))
             return Response({'csv_url': csv_url}, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({"message":'exception',"exception":str(e)}, status=status.HTTP_501_NOT_IMPLEMENTED)
