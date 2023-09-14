@@ -43,7 +43,6 @@ def create_csv(username):
     return csv_url
 
 def user_send_mail(username,recipient_mail):
-    
     subject = 'Support for Managing Stress'
     user = User.objects.get(username=username)
     user.stress_count = 0
@@ -86,7 +85,7 @@ def user_send_mail(username,recipient_mail):
 def send_therapist_email(therapist_email,username,user_email):
     subject = f'User Alert ({username}): Increased Chatbot Usage and problem is not solved'
     print(create_csv(username))
-    # Customize the message with HTML tags
+    # Customized the message using HTML tags
     html_message = f"""
     <!DOCTYPE html>
     <html lang="en">
@@ -114,13 +113,8 @@ def send_therapist_email(therapist_email,username,user_email):
     </body>
     </html>
     """
-
-    from_email = config("EMAIL_HOST_USER")  # This should be the same as EMAIL_HOST_USER
-    recipient_list = [therapist_email]  # Replace with the therapist's email address
-
-    # Create an EmailMessage instance
-   
-    
+    from_email = config("EMAIL_HOST_USER")  
+    recipient_list = [therapist_email] 
     send_mail(
         subject,
         strip_tags(html_message),
@@ -128,11 +122,5 @@ def send_therapist_email(therapist_email,username,user_email):
         recipient_list,
         html_message=html_message,
     )
-
-    # Attach the file to the email
- # Attach the file uploaded by the user
-
-    # Send the email
-    # email.send()
 
 
