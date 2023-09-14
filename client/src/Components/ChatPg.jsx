@@ -80,7 +80,7 @@ const ChatPg = () => {
           console.log(intent)
           const patterns = intent.patterns;
           const tag = intent.tag;
-          if ((patterns.includes(lastUserMessage.message) || tag.includes(lastUserMessage.message))) {
+          if ((patterns.includes(lastUserMessage.message) || lastUserMessage.message.includes(tag))) {
             detectedIntent = intent;
             console.log("hello_intent")
             break;
