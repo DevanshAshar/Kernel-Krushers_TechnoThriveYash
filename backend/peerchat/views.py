@@ -57,7 +57,7 @@ class ChatCSV(APIView):
             file_exists = os.path.isfile(file_path)
             current_timestamp = datetime.now().strftime('%Y-%m-%d')
             # Create and write data to the CSV file
-            with open(file_path, mode='a', newline='') as csv_file:
+            with open(file_path, mode='w', newline='') as csv_file:
                 writer = csv.writer(csv_file)
                 if not file_exists:
                     writer.writerow(["Timestamp","user","prompt","response"])

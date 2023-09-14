@@ -19,17 +19,14 @@ cloudinary.config(
 
 
 def create_csv(username):
-    # from .serializers import ChatResponseSerializer
     queryset = ChatResponse.objects.filter(user=User.objects.get(username=username))
-    # serializer = ChatResponseSerializer(queryset, many=True)
-    # data = serializer.data
     print(queryset[0].response)
     filename = f"data_{username}.csv"
     file_path = os.path.join("csv_files", filename).replace("\\", "/")
     file_exists = os.path.isfile(file_path)
     current_timestamp = datetime.now().strftime('%Y-%m-%d')
     # Create and write data to the CSV file
-    with open(file_path, mode='a', newline='') as csv_file:
+    with open(file_path, mode='w', newline='') as csv_file:
         writer = csv.writer(csv_file)
         if not file_exists:
             writer.writerow(["Timestamp","user","prompt","response"])
@@ -39,8 +36,8 @@ def create_csv(username):
     upload_result = cloudinary.uploader.upload(
         file_path, 
         resource_type="raw", 
-        public_id=file_path,  # Set the custom filename
-        overwrite=True  # Overwriting the file if it exists
+        public_id=file_path, 
+        overwrite=True  
     )
     csv_url = upload_result['secure_url']
     return csv_url
@@ -51,7 +48,6 @@ def user_send_mail(username,recipient_mail):
     user = User.objects.get(username=username)
     user.stress_count = 0
     user.save()
-    # Customize the message with HTML tags
     html_message = f"""
     <!DOCTYPE html>
     <html lang="en">
@@ -138,6 +134,5 @@ def send_therapist_email(therapist_email,username,user_email):
 
     # Send the email
     # email.send()
-    
-# send_therapist_email('hi')
+
 
