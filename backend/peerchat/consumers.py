@@ -27,9 +27,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 }))
                 await self.close()
                 return
-        if self.room.user_count <= self.room.max_user-1:
-            self.room.user_count += 1
-            await sync_to_async(self.room.save)()
+        self.room.user_count += 1
+        await sync_to_async(self.room.save)()
+        print(self.room.user_count)
+        if self.room.user_count <= self.room.max_user:
             await self.accept()
             await self.channel_layer.group_add(
                     self.room_group_name,
