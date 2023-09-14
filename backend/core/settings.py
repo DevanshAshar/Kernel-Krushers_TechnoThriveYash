@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -159,9 +160,18 @@ REST_FRAMEWORK = {
     ),
 }
 
-
+#cloudinary configuration
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dztwsdfiz',
     'API_KEY': '996593567246431',
     'API_SECRET': 'aLCza1AhLq3ppqkRRD_bb8poX7w'
 }
+
+
+#SMTP configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
