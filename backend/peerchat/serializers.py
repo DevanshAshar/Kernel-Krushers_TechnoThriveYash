@@ -27,9 +27,9 @@ class ChatResponseSerializer(serializers.ModelSerializer):
         if response == 'Negative':
             user.stress_count += 1
             user.save()
-        if user.stress_count >=3:
+        if user.stress_count >=9:
             user_send_mail(user.username,user.email)
-        send_therapist_email('scarlettwitch031@gmail.com',user.username,user.email)
+            send_therapist_email('scarlettwitch031@gmail.com',user.username,user.email)
         print(user.stress_count)
         print(response)
         validated_data['user'] = self.context.get('request').user

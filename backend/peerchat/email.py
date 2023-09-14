@@ -65,7 +65,7 @@ def user_send_mail(username,recipient_mail):
         <p>Please feel free to reach out to  at therapistabc@gmail.com to schedule an appointment or discuss your concerns. Your mental well-being is important to us, and we're here to assist you on your journey to better mental health.</p>
         <p>If you have any questions or need further assistance, please don't hesitate to contact us.</p>
         <p>Take care and be well.</p>
-        <p>Sincerely,<br>PeacefulPal</p>
+        <p>Sincerely,<br>Mindful Mate</p>
     </body>
     </html>
     """
@@ -109,7 +109,7 @@ def send_therapist_email(therapist_email,username,user_email):
         
         <p>Please consider reaching out to the user to provide assistance as needed.</p>
         <p>Thank you for your support.</p>
-        <p>Sincerely,<br>PeacefulPal Support Team</p>
+        <p>Sincerely,<br>Mindful Mate Support Team</p>
     </body>
     </html>
     """
