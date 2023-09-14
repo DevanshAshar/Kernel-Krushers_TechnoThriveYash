@@ -24,7 +24,7 @@ const Header = () => {
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <NavLink className="navbar-brand" to="/">
-            MentalHealth Chatbot
+            MindfulMate
           </NavLink>
           <button
             className="navbar-toggler"
