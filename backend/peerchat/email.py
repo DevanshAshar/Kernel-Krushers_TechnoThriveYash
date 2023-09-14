@@ -108,7 +108,7 @@ def send_therapist_email(therapist_email,username,user_email):
         <!-- Add a file icon and download button -->
         <p>
             <a href="{create_csv(username)}" style="text-decoration: none; background-color: #007BFF; color: #ffffff; padding: 10px 15px; border-radius: 5px; font-weight: bold; display: inline-block;">
-                <img src="https://example.com/file-icon.png" alt="File Icon" width="32" height="32" style="vertical-align: middle;"> Download File
+                <img src="https://icons8.com/icon/xdyzXTtWRBOu/xls" alt="File Icon" width="32" height="32" style="vertical-align: middle;"> Download File
             </a>
         </p>
         
