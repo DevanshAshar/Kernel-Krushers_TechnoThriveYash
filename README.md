@@ -29,6 +29,33 @@ Follow these steps to set up and run your Django project locally.
 
 ### Clone the Repository
 
-```bash
 git clone https://github.com/yourusername/your-django-project.git
 cd your-django-project
+
+## Create a Virtual Environment
+
+- python -m venv .venv
+
+## Activate the Virtual Environment
+
+- .venv\Scripts\activate
+
+## Install Dependencies
+
+- pip install -r requirements.txt
+
+## Apply Database Migrations
+
+- python manage.py migrate
+
+## Create a Superuser
+
+- python manage.py createsuperuser
+
+## Run the Development Server
+
+- python manage.py runserver
+
+
+You can now access your Django project at [http://127:8000/](http://127.0.0.1:8000/) and the admin panel at [http://127.0.0.1:8000/admin/.](http://127.0.0.1:8000/)
+
