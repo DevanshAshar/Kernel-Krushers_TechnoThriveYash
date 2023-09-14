@@ -3,7 +3,8 @@ import generateUniqueCode from "../utils/GenerateUniqueCode";
 import axios from "axios";
 import Layout from "../Layout/Layout.jsx";
 import "../css/peerchat.css";
-
+import SendIcon from '@mui/icons-material/Send';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 const PeerChat = () => {
   function generateUserId(length) {
     const characters = "0123456789";
@@ -147,17 +148,23 @@ const PeerChat = () => {
                 </div>
               ))}
             </div>
+            <div className="d d-flex">
             <input
               autoFocus
               required
+              style={{width:'80vw'}}
               type="text"
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               onKeyPress={handleKeyPress}
             />
-            <button type="submit" onClick={() => handleSendMessage(newMessage)}>
-              send
+            <button className="btn btn-success" type="submit" onClick={() => handleSendMessage(newMessage)}>
+              <SendIcon/>
             </button>
+            <button className="btn btn-primary">
+                    <ExitToAppIcon/>
+            </button>
+            </div>
           </>
         ) : (
           <>

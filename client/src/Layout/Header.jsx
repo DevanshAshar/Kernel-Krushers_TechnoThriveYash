@@ -2,9 +2,23 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../Context/auth";
 import toast from "react-hot-toast";
+import axios from "axios";
 const Header = () => {
   const auth = useAuth();
   const [isLoggedIn, setIsLoggedIn] = useState(Boolean(auth[0].token));
+  const handleLogout=()=>{
+    localStorage.removeItem("auth")
+    toast.success('Logged out')
+    setIsLoggedIn(false)
+  }
+  const handleTurtle=async()=>{
+    try {
+      await axios.get(`${process.env.REACT_APP_API}/turtle`)
+    } catch (error) {
+      toast.error('Something went wrong')
+      console.log(error.message)
+    }
+  }
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -46,8 +60,8 @@ const Header = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink className="dropdown-item" to="/xyz">
-                      Another action
+                    <NavLink className="dropdown-item" onClick={handleTurtle} to={"/"}>
+                      Turtle Game
                     </NavLink>
                   </li>
                 </ul>
@@ -64,7 +78,7 @@ const Header = () => {
               </li>
               {isLoggedIn ? (
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/chatPg">
+                  <NavLink className="nav-link" onClick={handleLogout}>
                     Logout
                   </NavLink>
                 </li>
