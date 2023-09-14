@@ -1,7 +1,6 @@
 from rest_framework import serializers
-
 from .sentiment_analysis import predict_sentiment
-
+from user.models import User
 from .models import *
 import pickle
 

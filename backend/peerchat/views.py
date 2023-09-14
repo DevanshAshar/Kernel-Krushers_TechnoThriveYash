@@ -58,7 +58,7 @@ class ChatCSV(APIView):
             with open(file_path, mode='a', newline='') as csv_file:
                 writer = csv.writer(csv_file)
                 if not file_exists:
-                    writer.writerow(["Timestamp","user","prompt","response"])  # Write header only if the file is newly created
+                    writer.writerow(["Timestamp","user","prompt","response"])
                 for row in data:
                     writer.writerow([current_timestamp,request.user,row['prompt'],row['response']])
 
@@ -66,10 +66,10 @@ class ChatCSV(APIView):
                 file_path, 
                 resource_type="raw", 
                 public_id=file_path,  # Set the custom filename
-                overwrite=True  # Overwrite if a file with the same name exists
+                overwrite=True  # Overwriting the file if it exists
             )
-            # Send the URL of the CSV file to the admin user
-            admin_email = "admin@example.com"  # Replace with the admin's email
+            # Send the URL of the CSV file to the therapist
+            admin_email = "therapist@example.com"  # Replace with the therapist email
             csv_url = upload_result['secure_url']
             return Response({'csv_url': csv_url}, status=status.HTTP_201_CREATED)
         except Exception as e:

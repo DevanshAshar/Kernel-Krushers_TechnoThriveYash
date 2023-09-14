@@ -18,6 +18,7 @@ class User(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     is_email_verified = models.BooleanField(default=False)
     gender = models.CharField(max_length=100,default='prefer not to say')
+    stress_count = models.PositiveIntegerField(default=0)
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
