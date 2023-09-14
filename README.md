@@ -23,15 +23,15 @@
  - OpenAI
 
 # Screenshots
-![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/b89f6586-3053-4909-92ba-5f6fca7dfaac)
-![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/499779b9-7864-49fd-9fe7-08fbf9bca8cc)
-![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/e70b634d-de93-4e90-b532-cb52fb8dc05b)
-![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/3c144007-67f1-45cb-b91a-f3d7ab782757)
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/2b49ff62-277c-463f-8a8c-8d162e6713b5)
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/1fb8789f-8eb2-4ce4-b5fb-d3ac854d468e)
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/ab28b685-09e1-41fd-a89d-479217811afe)
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/c6572b86-c7da-4c4a-a08f-a459a051732d)
 <br/>Sample CSV sent to Therapist<br/>
-![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/90c35b84-e61c-4c6a-b502-59fa2185b9dd)
-![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/aebeb287-203f-4f9b-b760-2dc9a9a9d915)
-![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/f7baead4-a02c-49c2-95e1-980b69913a0e)
-![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/75fd4f0e-0892-4de3-b70f-f8e8999b6cad)
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/507a7b14-fca1-4514-aaa2-3a37394112fe)
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/6af6a724-d1d8-49d5-9395-b3e9d7e6f6a6)
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/b56782b4-4c11-4dbd-aff1-fb75a6c43b3d)
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/8b65abc8-1144-4aa6-ba0b-5ddc0fb948b2)
 
 # Contributors
 
