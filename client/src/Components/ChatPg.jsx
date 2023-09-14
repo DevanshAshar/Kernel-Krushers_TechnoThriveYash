@@ -7,6 +7,7 @@ import Layout from '../Layout/Layout';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import MicIcon from '@mui/icons-material/Mic';
 import SendIcon from '@mui/icons-material/Send';
+import axios from 'axios';
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 const systemMessage = {
@@ -33,7 +34,21 @@ const ChatPg = () => {
       setTranscribedMessage(transcript);
     }
   }, [transcript]);
+  const sendToServer = async (message) => {
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API}/room/chatresponse/`, {
+        prompt:message
+      });
 
+      if (response.status === 201) {
+        console.log('Message sent to the server successfully:', message);
+      } else {
+        console.error('Failed to send message to the server.');
+      }
+    } catch (error) {
+      console.error('Error sending message to the server:', error);
+    }
+  };
   const handleSend = async (message) => {
     const newMessage = {
       message,
@@ -44,7 +59,7 @@ const ChatPg = () => {
     const newMessages = [...messages, newMessage];
 
     setMessages(newMessages);
-
+    await sendToServer(message);
     setIsTyping(true);
     await processMessageToChatGPT(newMessages);
   };

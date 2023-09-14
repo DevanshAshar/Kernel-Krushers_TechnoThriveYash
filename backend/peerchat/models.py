@@ -12,7 +12,7 @@ class Room(models.Model):
 class ChatResponse(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     prompt = models.TextField()
-    response = models.TextField()
+    response = models.TextField(null=True,blank=True)
     
 
     
