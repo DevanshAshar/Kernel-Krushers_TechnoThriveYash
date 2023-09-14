@@ -33,9 +33,20 @@
 ![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/f7baead4-a02c-49c2-95e1-980b69913a0e)
 ![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/75fd4f0e-0892-4de3-b70f-f8e8999b6cad)
 
+# Contributors
+
+We would like to acknowledge the exceptional teamwork and collaboration among all the contributors involved in this project. The successful outcome of our endeavor is a testament to the collective effort and dedication of each team member.
+
+- [Dhruvin Chawda](https://github.com/Dhruvin3103)
+- [Dev Patel](https://github.com/devvp8)
+- [Devansh Ashar](https://github.com/DevanshAshar)
+- [Prerak Patel](https://github.com/PrerakPatel13)
+- [Harshil Shah](https://github.com/Harshil-Shah03)
+- [Param Shah](https://github.com/dragonRageX)
+
 # Django Installtion
 
-A brief description of your Django project.
+A brief description for setting up Django project.
 
 ## Table of Contents
 
