@@ -14,12 +14,12 @@ import uuid
 import os
 import cloudinary
 import cloudinary.uploader
-
+from decouple import config
 
 cloudinary.config( 
-  cloud_name = "dztwsdfiz", 
-  api_key = "996593567246431", 
-  api_secret = "aLCza1AhLq3ppqkRRD_bb8poX7w" 
+  cloud_name = config('CLOUD_NAME'), 
+  api_key = config('API_KEY'), 
+  api_secret = config('API_SECRET') 
 )
 
 # Create your views here.

@@ -6,6 +6,6 @@ with open('backend/model/sentiment_analysis_model.pkl', 'rb') as f:
     model, tokenizer = pickle.load(f)
 
 # Predict the sentiment of a text
-text = 'i am feeling low.'
+text = 'happy'
 response = predict_sentiment(text)
-print(type(response))
+print(response)
