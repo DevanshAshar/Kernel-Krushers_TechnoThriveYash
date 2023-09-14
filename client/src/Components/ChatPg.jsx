@@ -173,7 +173,7 @@ const ChatPg = () => {
         <ChatContainer>
           <MessageList
             scrollBehavior="smooth"
-            typingIndicator={isTyping ? <TypingIndicator content="Typing..." /> : null}
+            typingIndicator={isTyping ? <TypingIndicator content="MindfulMate is Typing..." /> : null}
           >
             {messages.map((message, i) => {
               return <Message key={i} model={message} />
