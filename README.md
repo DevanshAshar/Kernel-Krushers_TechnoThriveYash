@@ -1,5 +1,5 @@
 # Kernel-Krushers_TechnoThriveYash
-
+- Generative AI Hackathon by Yash Technologies.
 # Features
 - Login/Signup Authentication using JWT.
 - Anonymous Peer Group Chatting using WebSockets (Django Channels).
