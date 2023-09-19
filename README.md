@@ -3,7 +3,7 @@
 # Features
 - Login/Signup Authentication using JWT.
 - Anonymous Peer Group Chatting using WebSockets (Django Channels).
-- AI Chatbot using OpenAI API and Dataset generated from DataBricks Dolly.
+- AI Chatbot using OpenAI API fine tuned with Dataset generated from DataBricks Dolly.
 - Multimodal Message sending option using react-speech-recognition package.
 - Breathing Exercise Game.
 - Mail sending using SMTP.
