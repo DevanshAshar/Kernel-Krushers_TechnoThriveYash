@@ -51,17 +51,17 @@ const Header = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Games
+                  Zen Corner
                 </NavLink>
                 <ul className="dropdown-menu">
                   <li>
                     <NavLink className="dropdown-item" to="/breathingGame">
-                      Breathing Game
+                      Meditate and Unwind 
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink className="dropdown-item" onClick={handleTurtle} to={"/"}>
-                      Turtle Game
+                    <NavLink className="dropdown-item" to={"/speak"}>
+                      Rescue Sessions
                     </NavLink>
                   </li>
                 </ul>
