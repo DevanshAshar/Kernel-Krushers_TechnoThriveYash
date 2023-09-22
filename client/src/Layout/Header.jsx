@@ -9,7 +9,7 @@ const Header = () => {
   const handleLogout=()=>{
     localStorage.removeItem("auth")
     toast.success('Logged out')
-    setIsLoggedIn(false)
+    window.location.reload()
   }
   const handleTurtle=async()=>{
     try {
@@ -76,7 +76,7 @@ const Header = () => {
                   AI Chatbot
                 </NavLink>
               </li>
-              {isLoggedIn ? (
+              {auth && auth[0].token? (
                 <li className="nav-item">
                   <NavLink className="nav-link" onClick={handleLogout}>
                     Logout
