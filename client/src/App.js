@@ -10,6 +10,7 @@ import SpeechRecognitionDemo from "./Components/SpeechRecognitionDemo";
 import TextToSpeech from "./Components/TextToSpeech";
 import RegionalBot from "./Components/RegionalBot";
 import QuestionnaireForm from "./Components/QuestionnaireForm";
+import RescueSessions from "./Components/RescueSessions";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
       <Route path='/peerchat' element={<PeerChat/>}/>
       <Route path='/speech' element={<SpeechToText/>}/>
       <Route path='/srd' element={<SpeechRecognitionDemo/>}/>
-      <Route path='/speak' element={<TextToSpeech/>}/>
+      <Route path='/speak' element={<RescueSessions/>}/>
       <Route path='/form' element={<QuestionnaireForm/>}/>
     </Routes>
   );
