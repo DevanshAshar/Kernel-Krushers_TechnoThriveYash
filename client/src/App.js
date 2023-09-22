@@ -11,6 +11,7 @@ import TextToSpeech from "./Components/TextToSpeech";
 import RegionalBot from "./Components/RegionalBot";
 import QuestionnaireForm from "./Components/QuestionnaireForm";
 import RescueSessions from "./Components/RescueSessions";
+import Room from "./Components/Room";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="" element={<Private/>} exact>
         <Route path="/chatPg" element={<ChatPg />} />
         <Route path="/regionalBot" element={<RegionalBot/>}/>
+        <Route path="/room/:id" element={<Room/>}/>
       </Route>
       <Route path="/breathingGame" element={<BreathingCircle />} />
       <Route path='/peerchat' element={<PeerChat/>}/>

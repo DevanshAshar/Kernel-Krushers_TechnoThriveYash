@@ -11,14 +11,6 @@ const Header = () => {
     toast.success('Logged out')
     window.location.reload()
   }
-  const handleTurtle=async()=>{
-    try {
-      await axios.get(`${process.env.REACT_APP_API}/turtle`)
-    } catch (error) {
-      toast.error('Something went wrong')
-      console.log(error.message)
-    }
-  }
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
