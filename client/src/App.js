@@ -9,6 +9,7 @@ import Private from "./Components/Private";
 import SpeechRecognitionDemo from "./Components/SpeechRecognitionDemo";
 import TextToSpeech from "./Components/TextToSpeech";
 import RegionalBot from "./Components/RegionalBot";
+import QuestionnaireForm from "./Components/QuestionnaireForm";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path='/speech' element={<SpeechToText/>}/>
       <Route path='/srd' element={<SpeechRecognitionDemo/>}/>
       <Route path='/speak' element={<TextToSpeech/>}/>
+      <Route path='/form' element={<QuestionnaireForm/>}/>
     </Routes>
   );
 }

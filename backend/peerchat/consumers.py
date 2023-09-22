@@ -15,6 +15,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         print(self.lobby_code)
         self.room_group_name = self.lobby_code
         self.room = await sync_to_async(Room.objects.filter(room_id=self.lobby_code).first)()
+        print(self.room.user_count,'count')
         print('sdf')
         if not self.room:
                 await self.accept()
@@ -28,16 +29,29 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 return
         self.room.user_count += 1
         await sync_to_async(self.room.save)()
-        await self.accept()
-        await self.channel_layer.group_add(
-                self.room_group_name,
-                self.channel_name
-            )
+        print(self.room.user_count)
+        if self.room.user_count <= self.room.max_user:
+            await self.accept()
+            await self.channel_layer.group_add(
+                    self.room_group_name,
+                    self.channel_name
+                )
+        else:
+            await self.accept()
+            print("send mess to fronted")
+            await self.send(text_data=json.dumps({
+                'status' : 400,
+                'message': 'Room is full wait until some leaves'
+            }))
+            await self.close()
+            return
+            
             
     
     async def disconnect(self,close_code):
         print(close_code)
         print('chat disconnect')
+        self.room = await sync_to_async(Room.objects.filter(room_id=self.lobby_code).first)()
         if self.room:
             self.room.user_count -= 1
             await sync_to_async(self.room.save)()

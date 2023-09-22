@@ -49,28 +49,31 @@ class ChatCSV(APIView):
             queryset = ChatResponse.objects.filter(user= request.user)
             serializer = ChatResponseSerializer(queryset, many=True)
             data = serializer.data
-            print(data)
+            for i in queryset:
+                print(i.response)
+            print(queryset[0].response)
             filename = f"data_{request.user}.csv"
             file_path = os.path.join("csv_files", filename).replace("\\", "/")
             file_exists = os.path.isfile(file_path)
             current_timestamp = datetime.now().strftime('%Y-%m-%d')
             # Create and write data to the CSV file
-            with open(file_path, mode='a', newline='') as csv_file:
+            with open(file_path, mode='w', newline='') as csv_file:
                 writer = csv.writer(csv_file)
                 if not file_exists:
-                    writer.writerow(["Timestamp","user","prompt","response"])  # Write header only if the file is newly created
-                for row in data:
-                    writer.writerow([current_timestamp,request.user,row['prompt'],row['response']])
+                    writer.writerow(["Timestamp","user","prompt","response"])
+                for row in queryset:
+                    writer.writerow([current_timestamp,request.user,row.prompt,row.response])
 
             upload_result = cloudinary.uploader.upload(
                 file_path, 
                 resource_type="raw", 
                 public_id=file_path,  # Set the custom filename
-                overwrite=True  # Overwrite if a file with the same name exists
+                overwrite=True  # Overwriting the file if it exists
             )
-            # Send the URL of the CSV file to the admin user
-            admin_email = "admin@example.com"  # Replace with the admin's email
+            # Send the URL of the CSV file to the therapist
+            admin_email = "therapist@example.com"  # Replace with the therapist email
             csv_url = upload_result['secure_url']
+            print(csv_url,type(csv_url))
             return Response({'csv_url': csv_url}, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({"message":'exception',"exception":str(e)}, status=status.HTTP_501_NOT_IMPLEMENTED)
