@@ -6,6 +6,7 @@ import PeerChat from "./Components/PeerChat";
 import SpeechToText from "./Components/SpeechToText";
 import Landing from "./Layout/Landing";
 import Private from "./Components/Private";
+import QuestionnaireForm from "./Components/QuestionnaireForm";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/breathingGame" element={<BreathingCircle />} />
       <Route path='/peerchat' element={<PeerChat/>}/>
       <Route path='/speech' element={<SpeechToText/>}/>
+      <Route path='/form' element={<QuestionnaireForm/>}/>
     </Routes>
   );
 }
