@@ -115,7 +115,8 @@ const RegionalBot = () => {
         from: selectedLanguage,
         to: 'en'
       });
-      setTranslatedPrompt(t.data.translated);
+      await setTranslatedPrompt(t.data.translated);
+      
     } catch (error) {
       console.log(error.message)
       toast.error('Something went wrong');
@@ -125,7 +126,25 @@ const RegionalBot = () => {
     //setIsTyping(false);
     setMicActive(false);
   };
+  const sendToServer=async()=>{
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API}/room/chatresponse/`, {
+        prompt:translatedPrompt
+      });
 
+      if (response.status === 201) {
+        console.log('Message sent to the server successfully');
+      } else {
+        console.error('Failed to send message to the server.');
+      }
+    } catch (error) {
+      // toast.error('something went wrong')
+      console.log(error.message)
+    }
+  }
+  useEffect(()=>{
+    sendToServer()
+  },[translatedPrompt])
   async function processMessageToChatGPT(chatMessages) {
     const lastUserMessage = chatMessages;
     if (lastUserMessage) {
