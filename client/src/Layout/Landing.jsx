@@ -30,7 +30,7 @@ const Landing = () => {
                     essential. Your self-care is a necessity You deserve to take
                     care of yourself.
                   </p>
-                  <Link>Click Here to Take a Mental Health Quizz</Link>
+                  <Link to="/form">Click Here to Take a Mental Health Quizz</Link>
                   </div>
                   {/* <div style={{color:'blue'}}>Logout? :(</div> */}
                 </div>
