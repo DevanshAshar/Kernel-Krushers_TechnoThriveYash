@@ -12,7 +12,7 @@ class Room(models.Model):
 class ChatResponse(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     prompt = models.TextField()
-    response = models.TextField()
+    response = models.TextField(null=True,blank=True)
     is_stressed = models.PositiveIntegerField(default=0)
     
     def __str__(self) -> str:
