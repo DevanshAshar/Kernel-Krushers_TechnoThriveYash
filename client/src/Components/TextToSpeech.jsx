@@ -45,9 +45,9 @@ const TextToSpeech = ({ text }) => {
 
   return (
     <div>
-      <button onClick={handlePlay}>{isPaused ? "Resume" : "Play"}</button>
-      <button onClick={handlePause}>Pause</button>
-      <button onClick={handleStop}>Stop</button>
+      <button className="form-button" onClick={handlePlay}>{isPaused ? "Resume" : "Play"}</button>
+      <button className="form-button" onClick={handlePause}>Pause</button>
+      <button className="form-button" onClick={handleStop}>Stop</button>
     </div>
   );
 };

@@ -24,11 +24,14 @@ const Landing = () => {
               <div className="card" style={{ width: "18rem" }}>
                 <div className="card-body">
                   <h5 className="card-title">Welcome</h5>
+                  <div>
                   <p style={{ color: "blue" }}>
                     Your mental health is a priority. Your happiness is
                     essential. Your self-care is a necessity You deserve to take
                     care of yourself.
                   </p>
+                  <Link>Click Here to Take a Mental Health Quizz</Link>
+                  </div>
                   {/* <div style={{color:'blue'}}>Logout? :(</div> */}
                 </div>
               </div>

@@ -90,7 +90,8 @@ label
 
 /* Setup For An Image That Fits On Most Screens And Resizes*/
 .with-bg-size {
-  background-image: url("https://images.unsplash.com/photo-1454897834822-1ece264a5d89?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=3a5615c0bc77123ece2a2663e2640341");
+  /* background-image: url("https://images.unsplash.com/photo-1454897834822-1ece264a5d89?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=3a5615c0bc77123ece2a2663e2640341"); */
+  background-image: url("https://images.unsplash.com/photo-1463003416389-296a1ad37ca0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=1bed2a6743851633b655ae774c15ac07");
   width: 100%;
   height: 100%;
   background-position: center;
@@ -105,7 +106,7 @@ label
   
 }
 /* The Keyframes*/
-@keyframes back {
+/* @keyframes back {
   25% {
     background-image: url("https://images.unsplash.com/photo-1463003416389-296a1ad37ca0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=1bed2a6743851633b655ae774c15ac07");
   }
@@ -117,5 +118,5 @@ label
     background-image: url("https://images.unsplash.com/photo-1461770354136-8f58567b617a?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=f0c8c34fe56f9669d1c6d129f597f895");
   }
   
-/* Animation Does Not End At 100% Because It Makes The Images Transition In/Out Better For Some Reason*/
-}
+/* Animation Does Not End At 100% Because It Makes The Images Transition In/Out Better For Some Reason
+} */
