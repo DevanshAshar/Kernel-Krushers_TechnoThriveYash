@@ -1,37 +1,48 @@
 from rest_framework import serializers
 from .email import user_send_mail,send_therapist_email
-from .sentiment_analysis import predict_sentiment
+from model.sentiment_analysis import sentiment_analysis
 from user.models import User
 from .models import *
-import pickle
+import string
+import random
 
 class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = '__all__'
 
+class StressedUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StressedUser
+        fields = '__all__'
+        
+    
 class ChatResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChatResponse
         fields = ['prompt','response']
         
     def create(self, validated_data):
-        print(self.context.get('request').user)
         user = User.objects.get(id=self.context.get('request').user.id)
-        print(user)
-        with open('model/sentiment_analysis_model.pkl', 'rb') as f:
-            model, tokenizer = pickle.load(f)
-            # Predict the sentiment of a text
         text = validated_data['prompt']
-        response = predict_sentiment(text)
-        if response == 'Negative':
+        response = sentiment_analysis(text)
+        if response >= 50:
             user.stress_count += 1
             user.save()
-        if user.stress_count >=9:
+        if user.stress_count >=10:
             user_send_mail(user.username,user.email)
-            send_therapist_email('scarlettwitch031@gmail.com',user.username,user.email)
-        print(user.stress_count)
-        print(response)
+            stressuser = StressedUser.objects.filter(user=user).first()
+            csv_url = send_therapist_email('scarlettwitch031@gmail.com',user.username,user.email)
+            if StressedUser:
+                code = ''.join(random.choice(string.digits) for _ in range(6))
+                print(code)
+                new_stressuser = StressedUser(user=user, connect_code=code, prompt_csv=csv_url)
+                new_stressuser.save()
+            else:
+                stressuser.prompt_csv = csv_url
+                stressuser.save()
+                
+            
         validated_data['user'] = self.context.get('request').user
-        validated_data['is_stressed'] = 1 if response=='Negative' else 0
+        validated_data['is_stressed'] = 1 if response >= 50 else 0
         return super().create(validated_data)

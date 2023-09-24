@@ -160,6 +160,7 @@ REST_FRAMEWORK = {
     ),
 }
 
+
 #cloudinary configuration
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dztwsdfiz',
