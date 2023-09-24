@@ -45,7 +45,7 @@ def create_csv(username):
 def user_send_mail(username,recipient_mail):
     subject = 'Support for Managing Stress'
     user = User.objects.get(username=username)
-    # user.stress_count = 0
+    user.stress_count = 0
     user.save()
     html_message = f"""
     <!DOCTYPE html>
