@@ -28,6 +28,8 @@ def sentiment_analysis(text):
 
 # print(sentiment_analysis(text))
 
+
+# Bert model 
 # import torch
 # import pickle
 # from transformers import BertTokenizer, BertForSequenceClassification
