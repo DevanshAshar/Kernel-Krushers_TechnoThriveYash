@@ -45,7 +45,7 @@ def create_csv(username):
 def user_send_mail(username,recipient_mail):
     subject = 'Support for Managing Stress'
     user = User.objects.get(username=username)
-    user.stress_count = 0
+    # user.stress_count = 0
     user.save()
     html_message = f"""
     <!DOCTYPE html>
@@ -82,9 +82,12 @@ def user_send_mail(username,recipient_mail):
         html_message=html_message,
     )
     
+    
+    
 def send_therapist_email(therapist_email,username,user_email):
     subject = f'User Alert ({username}): Increased Chatbot Usage and problem is not solved'
-    print(create_csv(username))
+    csv_url = create_csv(username)
+    # print(create_csv(username))
     # Customized the message using HTML tags
     html_message = f"""
     <!DOCTYPE html>
@@ -123,4 +126,5 @@ def send_therapist_email(therapist_email,username,user_email):
         html_message=html_message,
     )
 
+    return csv_url
 

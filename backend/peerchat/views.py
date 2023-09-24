@@ -3,9 +3,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from rest_framework import generics
-from .models import Room, ChatResponse
-from .serializers import RoomSerializer, ChatResponseSerializer
-from rest_framework.permissions import IsAuthenticated
+from .models import Room, ChatResponse, StressedUser
+from .serializers import RoomSerializer, ChatResponseSerializer, StressedUserSerializer
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.http import HttpResponse
 from rest_framework import status
 from datetime import datetime
@@ -27,6 +27,13 @@ cloudinary.config(
 class GetRoomAPI(generics.GenericAPIView,ListModelMixin):
     queryset  = Room.objects.all()
     serializer_class = RoomSerializer
+    def get(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+    
+class StressUserView(generics.GenericAPIView,ListModelMixin):
+    permission_classes = [IsAdminUser]
+    queryset  = StressedUser.objects.all()
+    serializer_class = StressedUserSerializer
     def get(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
     
@@ -70,8 +77,6 @@ class ChatCSV(APIView):
                 public_id=file_path,  # Set the custom filename
                 overwrite=True  # Overwriting the file if it exists
             )
-            # Send the URL of the CSV file to the therapist
-            admin_email = "therapist@example.com"  # Replace with the therapist email
             csv_url = upload_result['secure_url']
             print(csv_url,type(csv_url))
             return Response({'csv_url': csv_url}, status=status.HTTP_201_CREATED)

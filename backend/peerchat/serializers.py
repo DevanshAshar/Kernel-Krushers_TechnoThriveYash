@@ -3,12 +3,20 @@ from .email import user_send_mail,send_therapist_email
 from model.sentiment_analysis import sentiment_analysis
 from user.models import User
 from .models import *
+import string
+import random
 
 class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = '__all__'
 
+class StressedUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StressedUser
+        fields = '__all__'
+        
+    
 class ChatResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChatResponse
@@ -23,7 +31,20 @@ class ChatResponseSerializer(serializers.ModelSerializer):
             user.save()
         if user.stress_count >=5:
             user_send_mail(user.username,user.email)
-            send_therapist_email('scarlettwitch031@gmail.com',user.username,user.email)
+            stressuser = StressedUser.objects.filter(user=user).first()
+            print(stressuser==None,'hi')
+            csv_url = send_therapist_email('scarlettwitch031@gmail.com',user.username,user.email)
+            # csv_url = 'http://127.0.0.1:8000/room/chatresponse/'
+            if StressedUser:
+                code = ''.join(random.choice(string.digits) for _ in range(6))
+                print(code)
+                new_stressuser = StressedUser(user=user, connect_code=code, prompt_csv=csv_url)
+                new_stressuser.save()
+            else:
+                stressuser.prompt_csv = csv_url
+                stressuser.save()
+                
+            
         validated_data['user'] = self.context.get('request').user
         validated_data['is_stressed'] = 1 if response >= 50 else 0
         return super().create(validated_data)
