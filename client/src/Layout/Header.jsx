@@ -6,19 +6,11 @@ import axios from "axios";
 const Header = () => {
   const auth = useAuth();
   const [isLoggedIn, setIsLoggedIn] = useState(Boolean(auth[0].token));
-  const handleLogout=()=>{
-    localStorage.removeItem("auth")
-    toast.success('Logged out')
-    setIsLoggedIn(false)
-  }
-  const handleTurtle=async()=>{
-    try {
-      await axios.get(`${process.env.REACT_APP_API}/turtle`)
-    } catch (error) {
-      toast.error('Something went wrong')
-      console.log(error.message)
-    }
-  }
+  const handleLogout = () => {
+    localStorage.removeItem("auth");
+    toast.success("Logged out");
+    window.location.reload();
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -51,17 +43,17 @@ const Header = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Games
+                  Zen Corner
                 </NavLink>
                 <ul className="dropdown-menu">
                   <li>
                     <NavLink className="dropdown-item" to="/breathingGame">
-                      Breathing Game
+                      Meditate and Unwind
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink className="dropdown-item" onClick={handleTurtle} to={"/"}>
-                      Turtle Game
+                    <NavLink className="dropdown-item" to={"/speak"}>
+                      Rescue Sessions
                     </NavLink>
                   </li>
                 </ul>
@@ -71,12 +63,29 @@ const Header = () => {
                   Peer Grps
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/chatPg">
+              <li className="nav-item dropdown">
+                <NavLink
+                  className="nav-link dropdown-toggle"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
                   AI Chatbot
                 </NavLink>
+                <ul className="dropdown-menu">
+                  <li>
+                    <NavLink className="dropdown-item" to="/chatPg">
+                      English
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="dropdown-item" to="/regionalBot">
+                      Regional
+                    </NavLink>
+                  </li>
+                </ul>
               </li>
-              {isLoggedIn ? (
+              {auth && auth[0].token ? (
                 <li className="nav-item">
                   <NavLink className="nav-link" onClick={handleLogout}>
                     Logout

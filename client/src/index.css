@@ -11,3 +11,112 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.form-header
+{
+  font-weight: 900;
+  text-align: center;
+  margin: 50px;
+  color: rgb(255, 255, 255);
+  /* font-size: 35px; */
+  background-color: transparent;
+  border: 4px solid black;
+  padding: 10px;
+  letter-spacing: 3px;
+  /* text-transform: capitalize; */
+}
+
+.questionnaire-form
+{
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  flex-direction: column;
+  /* position: absolute; */
+  margin: 10px;
+  /* background-color: rgba(216, 65, 65, 0.507);
+  border-radius: 10px; */
+}
+
+.questions
+{
+  margin: 15px;
+  color: yellow;
+  text-shadow: 1px 2px 1px black;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.radio-button
+{
+  margin: 8px;
+}
+
+.radio-button:hover
+{
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+label
+{
+  cursor: pointer;
+}
+
+.form-button
+{
+  margin: 30px 0px 10px 0px;
+  background-color: blue;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  height: 35px;
+  /* padding: 10px 0px; */
+  /* text-align: center; */
+}
+
+
+#color-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom right, #34495e, #2c3e50);
+  opacity: 0.6;
+  z-index: -1;
+}
+
+/* Setup For An Image That Fits On Most Screens And Resizes*/
+.with-bg-size {
+  /* background-image: url("https://images.unsplash.com/photo-1454897834822-1ece264a5d89?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=3a5615c0bc77123ece2a2663e2640341"); */
+  background-image: url("https://images.unsplash.com/photo-1463003416389-296a1ad37ca0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=1bed2a6743851633b655ae774c15ac07");
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  
+  
+  -webkit-animation: back 5s infinite; /* Safari 4+ */
+  -moz-animation:    back 5s infinite; /* Fx 5+ */
+  -o-animation:      back 5s infinite; /* Opera 12+ */
+  animation:         back 5s infinite; /* IE 10+, Fx 29+ */
+  
+  
+}
+/* The Keyframes*/
+/* @keyframes back {
+  25% {
+    background-image: url("https://images.unsplash.com/photo-1463003416389-296a1ad37ca0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=1bed2a6743851633b655ae774c15ac07");
+  }
+  50% {
+    background-image: url("https://images.unsplash.com/photo-1461080639469-66d73688fb21?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=dfec7f536c4133dc029608d2488e13e9");
+  }
+  
+  75%{
+    background-image: url("https://images.unsplash.com/photo-1461770354136-8f58567b617a?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=f0c8c34fe56f9669d1c6d129f597f895");
+  }
+  
+/* Animation Does Not End At 100% Because It Makes The Images Transition In/Out Better For Some Reason
+} */

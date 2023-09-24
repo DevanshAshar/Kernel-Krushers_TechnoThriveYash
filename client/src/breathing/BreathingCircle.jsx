@@ -31,7 +31,7 @@ const BreathingCircle = () => {
   return (
     <Layout>
     <div className='breathBody'>
-      <h1 className="mainH1">Relaxation App</h1>
+      <h1 className="mainH1" style={{color:'white'}}>Relaxation App</h1>
       <div className={containerClassName}>
         <div className="circleDiv"></div>
         <p className="circleText">{circleText}</p>

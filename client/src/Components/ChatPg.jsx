@@ -18,7 +18,7 @@ const systemMessage = {
 const ChatPg = () => {
   const [messages, setMessages] = useState([
     {
-      message: "Hello, I'm ChatGPT! Ask me anything!",
+      message: "Hello, I'm MindfulMate Ask me anything!",
       sentTime: "just now",
       sender: "ChatGPT"
     }
