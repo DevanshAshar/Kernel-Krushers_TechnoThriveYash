@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .email import user_send_mail,send_therapist_email
-from .sentiment_analysis import predict_sentiment
+# from .sentiment_analysis import predict_sentiment
+from model.sentiment_analysis import sentiment_analysis
 from user.models import User
 from .models import *
 import pickle
@@ -23,15 +24,17 @@ class ChatResponseSerializer(serializers.ModelSerializer):
             model, tokenizer = pickle.load(f)
             # Predict the sentiment of a text
         text = validated_data['prompt']
-        response = predict_sentiment(text)
-        if response == 'Negative':
+        # response = predict_sentiment(text)
+        print(sentiment_analysis(text))
+        response = sentiment_analysis(text)
+        if response >= 50:
             user.stress_count += 1
             user.save()
-        if user.stress_count >=9:
+        if user.stress_count >=5:
             user_send_mail(user.username,user.email)
             send_therapist_email('scarlettwitch031@gmail.com',user.username,user.email)
         print(user.stress_count)
         print(response)
         validated_data['user'] = self.context.get('request').user
-        validated_data['is_stressed'] = 1 if response=='Negative' else 0
+        validated_data['is_stressed'] = 1 if response >= 50 else 0
         return super().create(validated_data)
