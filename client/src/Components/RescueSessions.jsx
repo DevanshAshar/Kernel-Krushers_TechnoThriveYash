@@ -109,12 +109,7 @@ const RescueSessions = () => {
           >
             Phase 1
           </button>
-          <button
-            onClick={() => openModal('Phase 2', 'content')}
-            className="btn btn-primary m-2"
-          >
-            Phase 2
-          </button>
+        
         </div>
       </div>
 
