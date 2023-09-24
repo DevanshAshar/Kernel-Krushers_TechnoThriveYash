@@ -42,7 +42,7 @@ def create_csv(username):
     csv_url = upload_result['secure_url']
     return csv_url
 
-def user_send_mail(username,recipient_mail):
+def user_send_mail(username,recipient_mail,code):
     subject = 'Support for Managing Stress'
     user = User.objects.get(username=username)
     user.stress_count = 0
@@ -65,6 +65,7 @@ def user_send_mail(username,recipient_mail):
         <p>Please feel free to reach out to  at therapistabc@gmail.com to schedule an appointment or discuss your concerns. Your mental well-being is important to us, and we're here to assist you on your journey to better mental health.</p>
         <p>If you have any questions or need further assistance, please don't hesitate to contact us.</p>
         <p>Take care and be well.</p>
+        <p>localhost:3000/room/{code}</p>
         <p>Sincerely,<br>Mindful Mate</p>
     </body>
     </html>
@@ -84,7 +85,7 @@ def user_send_mail(username,recipient_mail):
     
     
     
-def send_therapist_email(therapist_email,username,user_email):
+def send_therapist_email(therapist_email,username,user_email,code):
     subject = f'User Alert ({username}): Increased Chatbot Usage and problem is not solved'
     csv_url = create_csv(username)
     # print(create_csv(username))
@@ -111,6 +112,7 @@ def send_therapist_email(therapist_email,username,user_email):
         </p>
         
         <p>Please consider reaching out to the user to provide assistance as needed.</p>
+        <p>localhost:3000/room/{code}</p>
         <p>Thank you for your support.</p>
         <p>Sincerely,<br>Mindful Mate Support Team</p>
     </body>

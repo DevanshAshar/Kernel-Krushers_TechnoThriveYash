@@ -16,6 +16,12 @@ class StressedUserSerializer(serializers.ModelSerializer):
         model = StressedUser
         fields = '__all__'
         
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['username'] = instance.user.username
+        data['email'] = instance.user.email
+        return data
+        
     
 class ChatResponseSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,15 +36,17 @@ class ChatResponseSerializer(serializers.ModelSerializer):
             user.stress_count += 1
             user.save()
         if user.stress_count >=10:
-            user_send_mail(user.username,user.email)
             stressuser = StressedUser.objects.filter(user=user).first()
-            csv_url = send_therapist_email('scarlettwitch031@gmail.com',user.username,user.email)
             if StressedUser:
                 code = ''.join(random.choice(string.digits) for _ in range(6))
                 print(code)
+                csv_url = send_therapist_email('scarlettwitch031@gmail.com',user.username,user.email,code)
+                user_send_mail(user.username,user.email,code)
                 new_stressuser = StressedUser(user=user, connect_code=code, prompt_csv=csv_url)
                 new_stressuser.save()
             else:
+                user_send_mail(user.username,user.email,stressuser.connect_code)
+                csv_url = send_therapist_email('scarlettwitch031@gmail.com',user.username,user.email,stressuser.connect_code)
                 stressuser.prompt_csv = csv_url
                 stressuser.save()
                 
