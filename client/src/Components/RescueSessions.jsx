@@ -116,18 +116,20 @@ const RescueSessions = () => {
       <div className="card m-2">
         <div className="card-header">{`Session #3`}</div>
         <div className="card-body">
-          <h5 className="card-title">Title</h5>
+          <h5 className="card-title">Overcoming Anxiety</h5>
           <button
-            onClick={() => openModal('Phase1', 'content')}
+            onClick={() => openModal('Phase1', `Hi there,
+            If you're feeling anxious, stressed, and overwhelmed it's okay; it happens to everyone sometimes.
+            Today, let's work on reducing your anxiety to feel more in control.
+            Anxiety sometimes leads to unhelpful thoughts and actions.
+            For example, we might avoid work when a deadline is near or overreact to a misunderstanding.
+            We may have thoughts like "I can't finish my work on time, I can't handle it!" or "Why haven't they replied to my message? Are they angry?". However, it's important to try and manage these thoughts and feelings.
+            First, identify what's making you anxious: Who or what is making you feel anxious?
+            Second, challenge your thoughts and try to reframe the situation in a healthier way. For example, instead of feeling overwhelmed that you have so many tasks to handle at once, remind yourself that you can make progress by taking one step at a time. If it's something a person said or did that made you anxious, try to consider their speech or have so many tasks to handle at once, remind yourself that you can make progress by taking one step at a time. If it's something a person said or did that made you anxious, try to consider their speech or actions from a different point of view as well.
+            Finally, manage your anxious feelings and consider how you can reduce them. In the case of a person making you feel anxious, it might be helpful to speak with them to clarify what they meant, or to minimise contact with them.`)}
             className="btn btn-primary m-2"
           >
             Phase 1
-          </button>
-          <button
-            onClick={() => openModal('Phase 2', 'content')}
-            className="btn btn-primary m-2"
-          >
-            Phase 2
           </button>
         </div>
       </div>

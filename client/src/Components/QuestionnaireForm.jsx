@@ -1,6 +1,9 @@
 import React from "react";
 import "../index.css"
 import Layout from "../Layout/Layout";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function getInitialSelectedOptionsArray()
 {
@@ -16,7 +19,7 @@ export default function QuestionnaireForm()
 {
     const [selectedOptionsArray, setSelectedOptionsArray] = React.useState(getInitialSelectedOptionsArray);
     console.log(selectedOptionsArray);
-
+    const navigate=useNavigate()
     const handleOptionChange = (e) => {
         const { name, value } = e.target;
         setSelectedOptionsArray((prevSelectedOptionsArray) => {
@@ -38,10 +41,18 @@ export default function QuestionnaireForm()
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit =async (e) => {
         e.preventDefault();
         // You can perform any action with the selected option here.
-        console.log("Form Submitted!");
+        try {
+            const res=await axios.post(`${process.env.REACT_APP_API}/submitForm`,{selectedOptionsArray})
+            toast.success('Response submitted')
+            navigate('/')
+        } catch (error) {
+            console.log(error.message)
+            toast.error('Something went wrong')
+        }
+
     };
 
     return (
