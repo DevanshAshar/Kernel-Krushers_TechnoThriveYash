@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "./Layout";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/auth";
@@ -7,6 +7,20 @@ import axios from "axios";
 import Login from "../Components/Login";
 const Landing = () => {
   const [auth, setAuth] = useAuth();
+  const [isDoctor,setIsDoctor]=useState(false)
+  const checkDoc=async()=>{
+    try {
+      const {data}=await axios.get(`${process.env.REACT_APP_API}/auth/users/me/`)
+      if(data.username==='admin')
+      setIsDoctor(true)
+    } catch (error) {
+      console.log(error.message)
+      // toast.error('Something went wrong')
+    }
+  }
+  useEffect(()=>{
+    checkDoc()
+  },[auth])
   return (
     <Layout>
       <div>
@@ -30,12 +44,15 @@ const Landing = () => {
                     essential. Your self-care is a necessity You deserve to take
                     care of yourself.
                   </p>
-                  <Link>Click Here to Take a Mental Health Quizz</Link>
+                  {isDoctor?(
+                    <Link to={"/doctorPg"}>View Patients</Link>
+                  ):(
+                    <Link to={"/form"}>Click Here to Take a Mental Health Quizz</Link>
+                  )}
+                  
                   </div>
-                  {/* <div style={{color:'blue'}}>Logout? :(</div> */}
                 </div>
               </div>
-              {/*  */}
             </>
           ) : (
             <Login />
