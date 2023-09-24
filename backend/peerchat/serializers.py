@@ -16,6 +16,12 @@ class StressedUserSerializer(serializers.ModelSerializer):
         model = StressedUser
         fields = '__all__'
         
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['username'] = instance.user.username
+        data['email'] = instance.user.email
+        return data
+        
     
 class ChatResponseSerializer(serializers.ModelSerializer):
     class Meta:
