@@ -45,7 +45,9 @@ export default function QuestionnaireForm()
         e.preventDefault();
         // You can perform any action with the selected option here.
         try {
-            const res=await axios.post(`${process.env.REACT_APP_API}/submitForm`,{selectedOptionsArray})
+            const optionarray = selectedOptionsArray.map(item => item.selectedOption);
+            const answer_array = `[${optionarray.map(option => `'${option}'`).join(',')}]`;
+            const res=await axios.post(`${process.env.REACT_APP_API}/user/submitForm/`,{answer_array})
             toast.success('Response submitted')
             navigate('/')
         } catch (error) {

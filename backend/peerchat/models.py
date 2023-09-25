@@ -21,7 +21,7 @@ class ChatResponse(models.Model):
 class StressedUser(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     connect_code = models.CharField(max_length=6)
-    prompt_csv = models.URLField()
+    prompt_csv = models.URLField(null=True,blank=True)
     form_csv = models.URLField(null=True,blank=True)
     
     def __str__(self) -> str:

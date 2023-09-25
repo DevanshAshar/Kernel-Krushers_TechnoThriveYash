@@ -5,3 +5,4 @@ __pycache__
 model/sentiment_analysis_model.pkl
 model
 class.pkl
+csv_files
