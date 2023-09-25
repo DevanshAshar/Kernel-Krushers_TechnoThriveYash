@@ -3,7 +3,6 @@ from .managers import UserManager
 from django.contrib.auth.models import AbstractBaseUser
 # Create your models here.
 
-
 class User(AbstractBaseUser):
     name = models.CharField(max_length=20, help_text='Enter your name',null=True, blank=True)
     username = models.CharField(max_length=200,unique=True)
@@ -46,3 +45,21 @@ class User(AbstractBaseUser):
     
     def is_verified(self):
         return (self.is_email_verified)
+    
+    
+# dont ask me why i made the model due frontend work this is been created : (
+# class StressForm(models.Model):
+#     question = models.CharField(max_length=300)
+#     opt1 = models.CharField(max_length=200)
+#     opt2 = models.CharField(max_length=200)
+#     opt3 = models.CharField(max_length=200)
+#     opt4 = models.CharField(max_length=200)
+    
+#     def __str__(self) -> str:
+#         return str(self.question)
+    
+class FormSubmitByUser(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    answer_array = models.TextField(default='[]')
+    def __str__(self) -> str:
+        return str(self.user)
