@@ -65,7 +65,7 @@ def user_send_mail(username,recipient_mail,code):
         <p>Please feel free to reach out to  at therapistabc@gmail.com to schedule an appointment or discuss your concerns. Your mental well-being is important to us, and we're here to assist you on your journey to better mental health.</p>
         <p>If you have any questions or need further assistance, please don't hesitate to contact us.</p>
         <p>Take care and be well.</p>
-        <p>localhost:3000/room/{code}</p>
+        <p>You can join the video call using this link localhost:3000/room/{code}</p>
         <p>Sincerely,<br>Mindful Mate</p>
     </body>
     </html>
