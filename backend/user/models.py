@@ -60,7 +60,6 @@ class User(AbstractBaseUser):
     
 class FormSubmitByUser(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    answer_array = models.CharField(max_length=300,default='[]')
-    
+    answer_array = models.TextField(default='[]')
     def __str__(self) -> str:
         return str(self.user)

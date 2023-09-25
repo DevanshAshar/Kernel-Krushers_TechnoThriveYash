@@ -22,8 +22,8 @@ class StressFormSerializer(serializers.ModelSerializer):
             print(csv_url)
             stressuser.form_csv = csv_url
             stressuser.save()       
-        # if formuser:
-        #     return "user created already"
-        # else:        
-        return super().create(validated_data)
+        if formuser:
+            return "user created already"
+        else:        
+            return super().create(validated_data)
     
