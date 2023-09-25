@@ -23,7 +23,7 @@ const systemMessage = {
 const RegionalBot = () => {
   const [messages, setMessages] = useState([
     {
-      message: "Hello, I'm MindfulMate, I'm here to listen , Tell me what's on your mind",
+      message: "नमस्ते, मैं माइंडफुलमेट हूं, मुझे बताएं कि आपके मन में क्या है",
       sentTime: "just now",
       sender: "ChatGPT",
     },
