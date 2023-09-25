@@ -24,6 +24,7 @@ question = [
 ]
 
 def create_csv(username, answer):
+    print(answer,answer[2])
     # Ensure the 'csv_files' directory exists
     if not os.path.exists("csv_files"):
         os.makedirs("csv_files")
@@ -47,4 +48,4 @@ def create_csv(username, answer):
     csv_url = upload_result['secure_url']
     return csv_url
 
-print(create_csv('dhruvin', [1, 1, 2, 3, 1, 4, 1, 2, 3, 1]))
+# print(create_csv('dhruvin', [1, 1, 2, 3, 1, 4, 1, 2, 3, 1]))
