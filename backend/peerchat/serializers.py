@@ -37,7 +37,7 @@ class ChatResponseSerializer(serializers.ModelSerializer):
             user.save()
         if user.stress_count >=10:
             stressuser = StressedUser.objects.filter(user=user).first()
-            if stressuser:
+            if stressuser==None:
                 code = ''.join(random.choice(string.digits) for _ in range(6))
                 print(code)
                 csv_url = send_therapist_email('scarlettwitch031@gmail.com',user.username,user.email,code)

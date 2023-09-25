@@ -2,7 +2,7 @@ from django.db import models
 from user.models import User
 # Create your models here.
 class Room(models.Model):
-    room_id = models.CharField(unique=True,max_length=6)
+    room_id = models.CharField(unique=True,max_length=18)
     max_user = models.PositiveIntegerField()
     user_count = models.PositiveIntegerField(default=0)
     
