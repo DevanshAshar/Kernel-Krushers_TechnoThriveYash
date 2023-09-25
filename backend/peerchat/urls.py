@@ -10,4 +10,3 @@ urlpatterns = [
     path('stressuser/',StressUserView.as_view(),name='stress_user')
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
