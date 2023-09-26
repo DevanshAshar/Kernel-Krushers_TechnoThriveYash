@@ -4,19 +4,23 @@
 - Login/Signup Authentication using JWT.
 - Anonymous Peer Group Chatting using WebSockets (Django Channels).
 - AI Chatbot using OpenAI API fine tuned with Dataset generated from DataBricks Dolly.
+- Regional Languages ChatBot where we processed users message by converting them to english.
 - Multimodal Message sending option using react-speech-recognition package.
+- Video Calling feature for connecting therapist and patient.
+- Rescue Sessions provided to users.
 - Breathing Exercise Game.
 - Mail sending using SMTP.
-- Sentiment Analysis to analyse user's mood.
+- Sentiment Analysis to analyse user's mood using ZeroShot Model.
 - Generation of CSV file of user's messages.
 
   # Technologies Used 
   
- - DbSQLite 
+ - PostgreSQL 
  - Django REST Framework
  - Django Channel
  - Cloudinary
- - React JS  
+ - React JS
+ - Node JS
  - Bootstrap
  - Material UI
  - DataBricks Dolly
@@ -32,6 +36,17 @@
 ![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/6af6a724-d1d8-49d5-9395-b3e9d7e6f6a6)
 ![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/b56782b4-4c11-4dbd-aff1-fb75a6c43b3d)
 ![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/8b65abc8-1144-4aa6-ba0b-5ddc0fb948b2)
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/35b0fbb4-1890-4fff-b643-996eea7290ba)
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/fb35de74-1973-4ccd-9f50-60678f462270)
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/59f3ed0d-a221-4c19-bac3-806daa25da0e)
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/c3e9b7a9-a4c6-47c3-82e0-908488cdb62e)
+<br/> Doctors pg where they can view and connect with stressed patients <br/>
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/95dd2ca4-a6de-448c-b7a6-6622b354089f)
+<br/> Form responses doctor can view <br/>
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/36024614-f4cc-44c6-88f5-ea62151628e0)
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/3c9079fa-c805-4ab4-979c-6d31efaacb62)
+![image](https://github.com/DevanshAshar/Kernel-Krushers_TechnoThriveYash/assets/113104126/7f8303a5-1638-423d-b2c1-3179dd2ea049)
+
 
 # Contributors
 
