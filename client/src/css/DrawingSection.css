@@ -1,0 +1,25 @@
+.drawing-section {
+    margin: 20px;
+  }
+  
+  .drawing-tools {
+    margin-bottom: 10px;
+  }
+  
+  .tool-button {
+    padding: 5px 10px;
+    margin-right: 10px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .color-picker, .brush-size {
+    margin-right: 10px;
+  }
+  
+  .canvas {
+    border: 1px solid #ccc;
+  }
+  

@@ -6,12 +6,11 @@ import {
   ChatContainer,
   MessageList,
   Message,
-  MessageInput,
   TypingIndicator,
 } from "@chatscope/chat-ui-kit-react";
 import MicIcon from "@mui/icons-material/Mic";
 import SendIcon from "@mui/icons-material/Send";
-import intents from '../intents.json';
+import intents from "../intents.json";
 import axios from "axios";
 import toast from "react-hot-toast";
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -20,6 +19,7 @@ const systemMessage = {
   role: "system",
   content: "Explain things like you're a mental health professional.",
 };
+
 const RegionalBot = () => {
   const [messages, setMessages] = useState([
     {
@@ -29,13 +29,10 @@ const RegionalBot = () => {
     },
   ]);
   const [translatedPrompt, setTranslatedPrompt] = useState("");
-  const [translatedResponse, setTranslatedResponse] = useState(""); // State to store translated response
   const [isTyping, setIsTyping] = useState(false);
-  const [listening, setListening] = useState(false);
-  const [recognitionActive, setRecognitionActive] = useState(false); // State to track microphone state
   const [transcript, setTranscript] = useState("");
+  const [translatedResponse, setTranslatedResponse] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("hi");
-  const [gptResp, setGptResp] = useState(null);
   const [micActive, setMicActive] = useState(false);
   let recognition = null;
 
@@ -56,8 +53,7 @@ const RegionalBot = () => {
     recognition.lang = selectedLanguage;
 
     recognition.onstart = () => {
-      setListening(true);
-      setRecognitionActive(true);
+      setMicActive(true);
     };
     recognition.onresult = (event) => {
       const transcript = Array.from(event.results)
@@ -67,64 +63,40 @@ const RegionalBot = () => {
     };
 
     recognition.onend = () => {
-      setListening(false);
-      setRecognitionActive(false);
+      setMicActive(false);
     };
 
     recognition.onerror = (error) => {
       console.error("Speech recognition error:", error);
-      setListening(false);
-      setRecognitionActive(false);
+      setMicActive(false);
     };
 
     recognition.start();
-    setMicActive(true);
   };
 
-  useEffect(() => {
-    if (!("SpeechRecognition" in window) && !("webkitSpeechRecognition" in window)) {
-      console.error("Speech recognition not supported in this browser.");
-    }
-
-    return () => {
-      if (recognition) {
-        recognition.stop();
-      }
-    };
-  }, []);
-
   const handleSend = async (message) => {
-    console.log('send clicked');
     const newMessage = {
       message,
-      direction: 'outgoing',
-      sender: "user"
+      direction:'outgoing',
+      sender: "user",
     };
 
-    const newMessages = [...messages, newMessage];
-
-    setMessages(newMessages);
+    setMessages([...messages, newMessage]);
     setTranscript(""); 
 
-    // Start displaying "MindfulMate is Typing..."
     setIsTyping(true);
 
     try {
       const t = await axios.post(`http://localhost:5000/convert`, {
         text: message,
         from: selectedLanguage,
-        to: 'en'
+        to: "en",
       });
       await setTranslatedPrompt(t.data.translated);
-      
     } catch (error) {
-      console.log(error.message)
-      toast.error('Something went wrong');
+      console.log(error.message);
+      toast.error("Something went wrong");
     }
-
-    // Translation is complete, stop displaying "MindfulMate is Typing..."
-    //setIsTyping(false);
-    setMicActive(false);
   };
   const sendToServer=async()=>{
     try {
@@ -145,71 +117,19 @@ const RegionalBot = () => {
   useEffect(()=>{
     sendToServer()
   },[translatedPrompt])
-  async function processMessageToChatGPT(chatMessages) {
-    const lastUserMessage = chatMessages;
-    if (lastUserMessage) {
-      // Determine intent based on user message
-      let detectedIntent = null;
-      if (intents) {
-        for (const intent of intents.intents) {
-          const patterns = intent.patterns;
-          const tag = intent.tag;
-          if (patterns.includes(lastUserMessage) || lastUserMessage.includes(tag)) {
-            detectedIntent = intent;
-            break;
-          }
-        }
-      }
+  useEffect(() => {
+    if (translatedPrompt) {
+      processMessageToChatGPT(translatedPrompt);
+    }
+  }, [translatedPrompt]);
 
-      // Use the detected intent to generate a response
-      let chatGPTResponse = "I'm not sure how to respond to that.";
-      if (detectedIntent) {
-        const responses = detectedIntent.responses;
-        const randomResponse =
-          responses[Math.floor(Math.random() * responses.length)]; // Choose a random response
-        chatGPTResponse = randomResponse;
-      } else {
-        console.log("hello_api");
-        const apiRequestBody = {
-          model: "gpt-3.5-turbo",
-          messages: [systemMessage, { role: 'user', content: lastUserMessage }],
-        };
-
-        try {
-          const apiResponse = await fetch(
-            "https://api.openai.com/v1/chat/completions",
-            {
-              method: "POST",
-              headers: {
-                Authorization: "Bearer " + API_KEY,
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(apiRequestBody),
-            }
-          );
-
-          if (apiResponse.ok) {
-            const responseData = await apiResponse.json();
-            if (responseData.choices && responseData.choices.length > 0) {
-              chatGPTResponse = responseData.choices[0].message.content;
-            }
-          } else {
-            console.error("API request failed:", apiResponse.statusText);
-          }
-        } catch (error) {
-          console.error("Error processing message:", error);
-        }
-      }
-
-      // Translate the ChatGPT response to the selected language
-      try {
-        const t = await axios.post(`http://localhost:5000/convert`, {
-          text: chatGPTResponse,
+  async function processMessageToChatGPT(userMessage) {
+    const {data}=await axios.post('http://localhost:5000/chatbot',{query:userMessage})
+    const t = await axios.post(`http://localhost:5000/convert`, {
+          text: data.response,
           from: 'en',
           to: selectedLanguage,
         });
-
-        // Set translated response and update messages only after convert API returns
         setTranslatedResponse(t.data.translated);
         setMessages((prevMessages) => [
           ...prevMessages,
@@ -218,53 +138,28 @@ const RegionalBot = () => {
             sender: "ChatGPT",
           },
         ]);
-      } catch (error) {
-        console.log(error.message);
-        toast.error('Something went wrong');
-      }
-    }
-
     setIsTyping(false);
   }
-
-  useEffect(() => {
-    if (translatedPrompt) {
-      console.log(translatedPrompt); 
-      processMessageToChatGPT(translatedPrompt);
-    }
-  }, [translatedPrompt]);
 
   return (
     <Layout>
       <div className="App">
-        <div
-          style={{
-            height: "650px",
-            width: "1350px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end",
-          }}
-        >
-          <MainContainer style={{ flex: "1", overflowY: "scroll" }}>
+        <div className="chat-container">
+          <MainContainer style={{ height: "650px", overflowY: "scroll" }}>
             <ChatContainer>
               <MessageList
                 scrollBehavior="smooth"
                 typingIndicator={
-                  isTyping ? (
-                    <TypingIndicator content="MindfulMate is Typing..." />
-                  ) : null
+                  isTyping ? <TypingIndicator content="MindfulMate is Typing..." /> : null
                 }
               >
-                {messages.map((message, i) => {
-                  return <Message key={i} model={message} />;
-                })}
+                {messages.map((message, i) => (
+                  <Message key={i} model={message} />
+                ))}
               </MessageList>
             </ChatContainer>
           </MainContainer>
-          <div
-            style={{ display: "flex", alignItems: "center", padding: "10px" }}
-          >
+          <div className="input-container">
             <select
               value={selectedLanguage}
               onChange={handleLanguageChange}
@@ -275,17 +170,18 @@ const RegionalBot = () => {
               <option value="ml">മലയാളം</option>
               <option value="kn">ಕನ್ನಡ</option>
               <option value="ta">தமிழ்</option>
-              <option value="tu">తెలుగు</option>
-              <option value="ur">تیلگو</option>
+              <option value="te">తెలుగు</option>
+              <option value="ur">اردو</option>
             </select>
             <input
-              placeholder="Message"
+              placeholder="Type message here"
               readOnly
               value={transcript}
-              style={{ flex: "1", marginRight: "10px", padding: "5px" }}
+              className="message-input"
+              style={{ flex: "1", marginRight: "10px", padding: "5px" ,width:'70vw'}}
             />
             <button
-              className={`mic-button btn btn-primary ${recognitionActive ? "active" : ""}`}
+              className={`mic-button btn btn-primary ${micActive ? "active" : ""}`}
               onClick={startListening}
             >
               <MicIcon />

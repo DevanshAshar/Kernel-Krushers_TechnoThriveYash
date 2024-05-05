@@ -6,3 +6,5 @@ model/sentiment_analysis_model.pkl
 model
 class.pkl
 csv_files
+dlib-19.24.1-cp311-cp311-win_amd64.whl
+*.h5

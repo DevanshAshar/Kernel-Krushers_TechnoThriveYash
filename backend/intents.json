@@ -1,0 +1,259 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hello",
+        "Hey there",
+        "Greetings",
+        "How are you?"
+      ],
+      "responses": [
+        "Hello! How can I assist you today?",
+        "Hi there! How can I help you today?",
+        "Hello, how may I help you with your mental health?"
+      ],
+      "context_set": ""
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Thank you",
+        "Thanks",
+        "Goodbye",
+        "See you later",
+        "Bye"
+      ],
+      "responses": [
+        "You're welcome. Take care of yourself!",
+        "Don't hesitate to come back if you need more assistance. Goodbye!",
+        "Goodbye! Take care of yourself and your mental health."
+      ],
+      "context_set": ""
+    },
+    {
+      "tag": "help",
+      "patterns": [
+        "Can you help me?",
+        "What can you do?",
+        "I need assistance",
+        "What do you offer?",
+        "Can you assist me?"
+      ],
+      "responses": [
+        "Sure, I can assist you with your mental health concerns. Please tell me more about your situation.",
+        "I offer mental health support and guidance. Please let me know how I can help you.",
+        "Yes, I can help you. What do you need assistance with regarding your mental health?"
+      ],
+      "context_set": ""
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "Thank you",
+        "Thanks",
+        "Appreciate it",
+        "Grateful",
+        "Thank you very much"
+      ],
+      "responses": [
+        "You're welcome. I'm here to assist you with your mental health.",
+        "No problem. I'm always here to help with your mental health concerns.",
+        "It's my pleasure to assist you with your mental health. Don't hesitate to reach out if you need more help."
+      ],
+      "context_set": ""
+    },
+    {
+      "tag": "name",
+      "patterns": [
+        "What's your name?",
+        "May I know your name?",
+        "Who are you?",
+        "Your name?",
+        "What should I call you?"
+      ],
+      "responses": [
+        "You can call me ChatGPT. I'm an AI-based mental health assistant.",
+        "My name is ChatGPT. I'm here to help you with your mental health concerns.",
+        "I'm ChatGPT, an AI mental health assistant. How may I assist you?"
+      ],
+      "context_set": ""
+    },
+    {
+      "tag": "age",
+      "patterns": [
+        "How old are you?",
+        "What's your age?",
+        "When were you born?",
+        "Your age?",
+        "May I know your age?"
+      ],
+      "responses": [
+        "I'm an artificial intelligence language model, so I don't have an age.",
+        "I'm an AI-based mental health assistant, so I don't have an age.",
+        "I'm a language model, so I don't have a physical age. How may I assist you with your mental health?"
+      ],
+      "context_set": ""
+    },
+    {
+      "tag": "feeling",
+      "patterns": [
+        "How are you feeling?",
+        "Are you feeling okay?",
+        "How do you feel today?",
+        "What's your emotional state?",
+        "How's your mood?"
+      ],
+      "context_set": ""
+    },
+    {
+            "tag": "symptoms_depression",
+            "patterns": [
+              "I'm feeling sad",
+              "I feel hopeless",
+              "I have no energy",
+              "I can't concentrate",
+              "I don't enjoy things I used to"
+            ],
+            "responses": [
+              "It sounds like you may be experiencing symptoms of depression. Have you talked to a mental health professional about it?",
+              "I'm sorry to hear that. It sounds like you may be struggling with depression. Have you considered seeking help?",
+              "Depression can be difficult to deal with, but you don't have to face it alone. Have you thought about talking to a therapist?"
+            ],
+            "context_set": ""
+          },
+          {
+            "tag": "treatment_depression",
+            "patterns": [
+              "What are the treatments for depression?",
+              "How can I manage my depression?",
+              "What are the best ways to treat depression?",
+              "Are there any natural remedies for depression?"
+            ],
+            "responses": [
+              "There are several treatments for depression, including therapy, medication, and lifestyle changes. It's important to work with a mental health professional to find the best treatment for you.",
+              "Managing depression can be challenging, but there are effective treatments available. Some people find therapy helpful, while others benefit from medication. It's important to find what works for you.",
+              "The most effective treatments for depression typically involve a combination of therapy, medication, and lifestyle changes. It's important to work with a mental health professional to create a treatment plan that works for you.",
+              "While there are no natural remedies that can cure depression, some people find that exercise, meditation, and other self-care practices can be helpful in managing symptoms."
+            ],
+            "context_set": ""
+          },
+          {
+            "tag": "suicidal_thoughts",
+            "patterns": [
+              "I feel like ending my life",
+              "I want to kill myself",
+              "I'm thinking about suicide",
+              "I don't want to be alive anymore",
+              "I'm feeling hopeless and helpless"
+            ],
+            "responses": [
+              "I'm sorry to hear that you're feeling that way. It's important that you get help right away. Please call the National Suicide Prevention Lifeline at 1-800-273-TALK (8255) or seek emergency medical attention.",
+              "I'm concerned about your safety. Please seek help immediately. You can call the National Suicide Prevention Lifeline at 1-800-273-TALK (8255) or go to your nearest emergency room.",
+              "It's understandable that you're feeling overwhelmed, but please know that you're not alone. There is help available. Please call the National Suicide Prevention Lifeline at 1-800-273-TALK (8255) or reach out to a mental health professional as soon as possible."
+            ],
+            "context_set": ""
+            },
+            {
+            "tag": "anxiety",
+            "patterns": [
+            "I'm feeling anxious",
+            "I'm having a panic attack",
+            "I can't stop worrying",
+            "I'm always on edge",
+            "My heart is racing"
+            ],
+            "responses": [
+            "It sounds like you may be struggling with anxiety. Have you talked to a mental health professional about it?",
+            "I'm sorry to hear that. Anxiety can be difficult to deal with, but there are effective treatments available. Have you considered seeking help?",
+            "Anxiety can be overwhelming, but there are things you can do to manage it. Have you thought about talking to a therapist or trying relaxation techniques?",
+            "It's understandable to feel anxious at times, but if it's interfering with your daily life, it's important to seek help. There are effective treatments available for anxiety."
+            ],
+            "context_set": ""
+            },
+            {
+            "tag": "treatment_anxiety",
+            "patterns": [
+            "What are the treatments for anxiety?",
+            "How can I manage my anxiety?",
+            "What are the best ways to treat anxiety?",
+            "Are there any natural remedies for anxiety?"
+            ],
+            "responses": [
+            "There are several treatments for anxiety, including therapy, medication, and lifestyle changes. It's important to work with a mental health professional to find the best treatment for you.",
+            "Managing anxiety can be challenging, but there are effective treatments available. Some people find therapy helpful, while others benefit from medication. It's important to find what works for you.",
+            "The most effective treatments for anxiety typically involve a combination of therapy, medication, and lifestyle changes. It's important to work with a mental health professional to create a treatment."
+            ],
+            "context_set": ""
+            },
+            {
+              "tag": "depression_symptoms",
+              "patterns": ["What are the symptoms of depression?", "How can I identify depression?", "What are the signs of depression?"],
+              "responses": ["Common symptoms of depression include persistent sadness, loss of interest or pleasure, changes in appetite or weight, sleep disturbances, fatigue, feelings of worthlessness or guilt, difficulty concentrating, and thoughts of self-harm or suicide. It's important to consult a mental health professional for a proper diagnosis."]
+            },
+            {
+              "tag": "seek_help",
+              "patterns": ["I need help", "Where can I find help?", "How do I seek professional help?"],
+              "responses": ["I'm here to support you. It's crucial to reach out to a mental health professional for assistance. You can start by contacting your primary care physician or searching for mental health clinics or therapists in your area. There are also helplines available for immediate support. Remember, you don't have to face this alone."]
+            },
+            {
+              "tag": "self_care",
+              "patterns": ["How can I take care of myself?", "What are some self-care tips?", "Any advice for self-care?"],
+              "responses": ["Self-care plays an essential role in managing depression. Some self-care practices include regular exercise, maintaining a balanced diet, getting enough sleep, engaging in activities you enjoy, spending time with loved ones, practicing relaxation techniques like deep breathing or meditation, and seeking emotional support when needed. Remember to be kind to yourself."]
+            },
+            {
+              "tag": "therapy",
+              "patterns": ["What is therapy?", "How can therapy help with depression?", "Should I consider therapy?"],
+              "responses": ["Therapy, also known as counseling or psychotherapy, involves talking to a trained mental health professional about your thoughts, feelings, and experiences. Therapy can be highly beneficial for managing depression by providing a supportive and non-judgmental environment, teaching coping strategies, and helping you gain insights into your emotions and behaviors. It's worth considering therapy as part of your treatment plan."]
+            },
+            {
+              "tag": "medication",
+              "patterns": ["Do I need medication?", "How can medication help?", "Should I take antidepressants?"],
+              "responses": ["Medication can be an effective treatment for depression, particularly in moderate to severe cases. Antidepressants can help regulate brain chemistry and alleviate symptoms. However, the decision to use medication should be made in consultation with a psychiatrist or other healthcare professional. They can assess your specific situation and provide guidance on the most appropriate treatment options."]
+            },
+            {
+              "tag": "support",
+              "patterns": ["I feel alone", "I don't have anyone to talk to", "Can you support me?"],
+              "responses": ["I'm here to support you, and you're not alone in this journey. It's important to reach out to friends, family, or support groups who can provide understanding and empathy. Additionally, consider talking to a mental health professional who can provide guidance and support tailored to your needs."]
+            },
+            {
+              "tag": "emergency",
+              "patterns": ["I'm in crisis", "I'm having suicidal thoughts", "I need immediate help"],
+              "responses": ["I'm really sorry to hear that you're feeling this way, but I can't provide the help that you need. It's essential to reach out to a crisis hotline or emergency services immediately. In the United States, you can call the National Suicide Prevention Lifeline at 1-800-273-TALK (1-800-273-8255). Remember, there are people who care about you and want to help."]
+            },
+            {
+              "tag": "fallback",
+              "patterns": [],
+              "responses": ["I'm sorry, but I'm not sure I understand. Could you please rephrase your question or provide more details?"]
+            },
+            {
+              "tag": "coping_strategies",
+              "patterns": ["What are some coping strategies for depression?", "How can I cope with depressive episodes?", "Do you have any suggestions for managing depression?"],
+              "responses": ["Coping strategies can help you navigate depressive episodes. Some effective techniques include practicing self-care, journaling, talking to a trusted friend or family member, engaging in creative outlets like art or music, and participating in support groups."]
+              },
+              {
+              "tag": "challenging_thoughts",
+              "patterns": ["How can I challenge negative thoughts?", "What do I do when negative thoughts overwhelm me?", "Can you help me reframe my negative thinking?"],
+              "responses": ["Challenging negative thoughts is an essential part of managing depression. One technique is to question the validity of negative thoughts and look for evidence that supports more positive or realistic perspectives. Cognitive-behavioral therapy (CBT) techniques can be particularly helpful in identifying and challenging negative thinking patterns."]
+              },
+              {
+              "tag": "support_network",
+              "patterns": ["How can I build a support network?", "What if I don't have anyone to talk to?", "Do you have suggestions for finding support?"],
+              "responses": ["Building a support network is important for managing depression. Consider reaching out to friends, family members, or joining support groups where you can connect with people who understand what you're going through. Online communities and forums can also provide valuable support and understanding."]
+              },
+              {
+              "tag": "relapse_prevention",
+              "patterns": ["How can I prevent relapse?", "What should I do if my symptoms worsen?", "Do you have any tips for maintaining progress?"],
+              "responses": ["Preventing relapse involves consistent self-care, ongoing therapy or counseling, and monitoring your emotional well-being. It's important to recognize the early signs of relapse and seek professional help if your symptoms worsen. Developing a relapse prevention plan with a mental health professional can provide guidance and support."]
+              },
+              {
+              "tag": "exercise",
+              "patterns": ["How does exercise help with depression?", "What types of exercises are beneficial for mental health?", "How often should I exercise for mood improvement?"],
+              "responses": ["Exercise can have a positive impact on mood and mental health. Physical activity releases endorphins, which are known as 'feel-good' hormones. Any form of exercise that you enjoy, such as walking, jogging, yoga, or dancing, can be beneficial. Aim for at least 30 minutes of moderate-intensity exercise most days of the week, but start with a level that feels comfortable for you."]
+              }
+
+  ]
+}
+    
+

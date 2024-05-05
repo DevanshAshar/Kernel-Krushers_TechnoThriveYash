@@ -27,11 +27,11 @@ const Landing = () => {
         <div className="d-flex flex-wrap align-items-center">
           <img
             src="https://img.freepik.com/free-vector/hand-drawn-visit-psychologist-concept_52683-69070.jpg?size=626&ext=jpg&ga=GA1.2.1581494013.1688723703&semt=ais"
-            style={{ height: "auto", width: "38vw", marginRight: "" }}
+            style={{ height: "auto", width: "34vw", marginRight: "" }}
           />
           <img
             src="https://img.freepik.com/free-vector/woman-giving-comfort-support-friend_74855-5301.jpg?size=626&ext=jpg&ga=GA1.2.1581494013.1688723703&semt=ais"
-            style={{ height: "auto", width: "40vw", marginRight: "" }}
+            style={{ height: "auto", width: "38vw", marginRight: "" }}
           />
           {auth && auth.token ? (
             <>

@@ -14,6 +14,15 @@ app.post('/convert',async(req,res)=>{
         res.status(400).json({message:error.message})
     }
 })
+app.post('/chatbot',async(req,res)=>{
+    try {
+        console.log(req.body)
+        res.status(200).json({response:'message goes heere'})
+    } catch (error) {
+        console.log(error.message)
+        res.status(400).json({message:error.message})
+    }
+})
 app.listen(5000,()=>{
     console.log('server on')
 })
